@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerUIManager : MonoBehaviour
 {
     public GameObject score, comboText, comboCounter, brain;
-    public Sprite heartFull, heartEmpty, blank, axe, move, rifle, shotgun, dash;
+    public Sprite blank, axe, move, rifle, shotgun, dash;
 
     public Sprite[] brainSprites = new Sprite[4];
     public GameObject[] icons = new GameObject[3];
