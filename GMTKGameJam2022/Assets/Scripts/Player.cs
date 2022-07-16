@@ -170,6 +170,7 @@ public class Player: MonoBehaviour
                 break;
         }
 
+        UpdateInterface();
         controller.GetComponent<GameController>().NextMove();
     }
 
@@ -181,12 +182,8 @@ public class Player: MonoBehaviour
             if (dice[i].IsRolling())
             {
                 dice[i].TickAnimation();
+                uiManager.UpdateCurrency(i, dice[i].GetResult().res, dice[i].GetResult().quantity);
             }
-        }
-
-        for(int i = 0; i < dice.Length; i++)
-        {
-            //uiManager.UpdateCurrency(i, dice[i].GetResult().res, dice[i].GetResult().quantity);
         }
     }
 
