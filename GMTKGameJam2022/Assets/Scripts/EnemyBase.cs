@@ -14,6 +14,8 @@ public class EnemyBase : MonoBehaviour
 
     MapManager mapManager;
 
+    bool isAlive = true;
+
     private void Start()
     {
         prevPosition = transform.position;
@@ -40,8 +42,9 @@ public class EnemyBase : MonoBehaviour
 
     public void TakeTurn()
     {
+        if (!isAlive) return;
+
         // check if in range
-        // Debug.Log(player.transform.position);
         var range = mapManager.ManhattanDistance(transform.position, player.transform.position);
 
         // attack if so
@@ -79,6 +82,7 @@ public class EnemyBase : MonoBehaviour
 
     public void TakeDamage()
     {
+        isAlive = false;
         Destroy(gameObject);
     } 
 }
