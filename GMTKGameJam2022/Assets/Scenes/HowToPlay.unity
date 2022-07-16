@@ -478,10 +478,10 @@ RectTransform:
   m_Father: {fileID: 1481969977}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 51}
-  m_SizeDelta: {x: 1436.5618, y: 731.4258}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 45.188507}
+  m_SizeDelta: {x: 0, y: -90.376}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1743720622
 MonoBehaviour:
@@ -516,17 +516,17 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'The dice you selected will be rolled at the start of the turn.
+  m_Text: 'Roll your dice at the start of your turn with SPACE.
 
 
-    In
-    order to use a die''s ability press 1, 2, or 3 depending on which slot it is
-    in.  Move and aim abilities using WASD.
+    In order to
+    use a die''s ability press 1, 2, or 3 depending on which slot it is in.  Move
+    and aim abilities using WASD.
 
 
-    You must finish using an ability
-    before you can select another one, and your turn ends when you use all of the
-    abilities you rolled.
+    You must finish using an ability before you
+    can select another one, and your turn ends when you use all of the abilities
+    you rolled.
 
 
     Get multikills and maintain combos for high scores.
@@ -579,8 +579,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -413}
-  m_SizeDelta: {x: 509.3927, y: 124.2441}
+  m_AnchoredPosition: {x: 0, y: -202}
+  m_SizeDelta: {x: 268.4686, y: 65.4812}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2037675124
 MonoBehaviour:
