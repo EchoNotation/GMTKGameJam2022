@@ -57,11 +57,11 @@ public class Player: MonoBehaviour
         dice[2] = new Die();
 
         dice[0].InitializeMove();
-        dice[1].InitializeRanged();
-        dice[2].InitializeMagic();
+        dice[1].InitializeMelee();
+        dice[2].InitializeRanged();
 
-        gridPos.x = 13;
-        gridPos.y = 6;
+        gridPos.x = 15;
+        gridPos.y = 7;
 
         UpdateWorldPosition();
     }
@@ -98,21 +98,25 @@ public class Player: MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             UseAbility(0);
+            return;
         }
         else if(Input.GetKeyDown(KeyCode.Alpha2))
         {
             UseAbility(1);
+            return;
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3))
         {
             UseAbility(2);
+            return;
         }
 
-        if (dir == Direction.NONE) return;
+        if (dir == Direction.NONE || state == PlayerState.IDLE) return;
 
         switch (state)
         {
             case PlayerState.IDLE:
+                Debug.Log("You really shouldn't be here.");
                 break;
             case PlayerState.RELOADING:
                 state = PlayerState.AIMING_RANGED;
@@ -139,6 +143,8 @@ public class Player: MonoBehaviour
                 state = PlayerState.IDLE;
                 break;
         }
+
+        controller.GetComponent<GameController>().NextMove();
     }
 
     private void RollAllDice()
@@ -213,57 +219,6 @@ public class Player: MonoBehaviour
 
         return square;
     }
-
-    /*private Vector2Int[] FindRangedAffectedPositions(Direction dir)
-    {
-        List<Vector2Int> squares = new List<Vector2Int>();
-        Vector2Int targetPos = new Vector2Int(gridPos.x, gridPos.y);
-
-        switch (dir)
-        {
-            case Direction.UP:
-                targetPos.y++;
-                break;
-            case Direction.DOWN:
-                targetPos.y--;
-                break;
-            case Direction.LEFT:
-                targetPos.x--;
-                break;
-            case Direction.RIGHT:
-                targetPos.x++;
-                break;
-            case Direction.NONE:
-                Debug.Log("You shouldn't be here!");
-                return squares.ToArray();
-        }
-
-        while (controller.GetComponent<MapManager>().GetWalkable(targetPos))
-        {
-            squares.Add(targetPos);
-
-            switch (dir)
-            {
-                case Direction.UP:
-                    targetPos.y++;
-                    break;
-                case Direction.DOWN:
-                    targetPos.y--;
-                    break;
-                case Direction.LEFT:
-                    targetPos.x--;
-                    break;
-                case Direction.RIGHT:
-                    targetPos.x++;
-                    break;
-                case Direction.NONE:
-                    Debug.Log("You shouldn't be here!");
-                    return squares.ToArray();
-            }
-        }
-
-        return squares.ToArray();
-    }*/
 
     private Vector2Int[] FindDashAffectedPositions(Direction dir)
     {
