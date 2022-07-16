@@ -1096,6 +1096,22 @@ PrefabInstance:
       propertyPath: quantities.Array.data[2]
       value: 
       objectReference: {fileID: 1953811217}
+    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
+      propertyPath: brainSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: e33d726164623ad4399a806e66577d91, type: 3}
+    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
+      propertyPath: brainSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f09d65d5daeeb149874da8715622b9f, type: 3}
+    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
+      propertyPath: brainSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 3c93016c9fa36f746b8bc26c712040c2, type: 3}
+    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
+      propertyPath: brainSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: c6648df37efb81546ae015893b0dd0e6, type: 3}
     - target: {fileID: 771792212, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
       propertyPath: orthographic
       value: 1
