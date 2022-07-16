@@ -18,6 +18,9 @@ public class Die
     private int[] quantities = new int[6];
     private Roll current;
 
+    private bool fastRolling = false;
+
+
     public Roll GetResult()
     {
         return current;
@@ -25,8 +28,19 @@ public class Die
 
     public void Roll()
     {
-        int chosenFace = Random.Range(0, 6);
-        current = new Roll(faces[chosenFace], quantities[chosenFace]);
+        if(fastRolling)
+        {
+            int chosenFace = Random.Range(0, 6);
+            current = new Roll(faces[chosenFace], quantities[chosenFace]);
+            return;
+        }
+        
+
+    }
+
+    public void TickAnimation()
+    {
+        if(!fastRolling) return;
     }
 
     public void Initialize(Resource[] newFaces, int[] newQuantities)

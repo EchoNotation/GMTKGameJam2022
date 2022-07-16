@@ -25,11 +25,4 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void OnGUI()
-    {
-        if(GUI.Button(new Rect(20, 70, 50, 30), "Test"))
-        {
-            NextMove();
-        }
-    }
 }
