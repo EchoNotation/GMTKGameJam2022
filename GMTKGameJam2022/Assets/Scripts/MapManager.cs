@@ -170,7 +170,7 @@ public class MapManager : MonoBehaviour
 
     public bool GetWalkable(Vector3Int tilePosition)
     {
-        if (IsReserved(tilePosition)) return true;
+        if (IsReserved(tilePosition)) return false;
 
         var tileProperties = GetTileData(tilePosition);
         if (tileProperties)
@@ -182,11 +182,12 @@ public class MapManager : MonoBehaviour
 
     public bool GetWalkable(Vector2Int tilePosition)
     {
-        var tileProperties = GetTileData(new Vector3Int(tilePosition.x, tilePosition.y, 0));
-        if(tileProperties)
-        {
-            return tileProperties.isWalkable;
-        }
-        return false;
+        return GetWalkable(new Vector3Int(tilePosition.x, tilePosition.y));
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(20, 20, 20, 20), $"{reservedSpaces.Count} reserved");
+        
     }
 }
