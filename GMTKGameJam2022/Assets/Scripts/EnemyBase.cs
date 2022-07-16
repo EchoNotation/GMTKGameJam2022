@@ -18,6 +18,8 @@ public class EnemyBase : MonoBehaviour
 
     bool isAnimating = false;
 
+    bool isRecovering = false;
+
     private void Start()
     {
         prevPosition = transform.position;
@@ -57,52 +59,71 @@ public class EnemyBase : MonoBehaviour
         mapManager.Reserve(desiredMove);
         mapManager.Unreserve(prevPosition);
         isAnimating = true;
+        isRecovering = true;
+    }
+
+    bool CanAttack()
+    {
+        // check if in range
+        var range = mapManager.ManhattanDistance(transform.position, player.transform.position);
+        return range <= 1 && !isRecovering;
+    }
+
+    bool TryMove()
+    {
+        if (isRecovering) return false;
+
+        var path = mapManager.GetPath(transform.position, player.transform.position);
+
+        if (path.Count <= 1) return false;
+
+        Vector3Int nextMove = path[1];
+        Vector3 nextPos = mapManager.map.GetCellCenterWorld(nextMove);
+
+        if (mapManager.IsReserved(nextPos)) return false;
+
+        //check collision against others (and don't collide with self)
+        var hit = Physics2D.BoxCast(nextPos, new Vector2(0.5f, 0.5f), 0f, Vector2.zero, 0f);
+        bool spaceFree = hit.collider == null || hit.collider.gameObject == gameObject;
+
+        if(spaceFree)
+        {
+            SetMove(nextPos);
+            Debug.DrawLine(transform.position, nextPos, Color.green, 3f);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void Attack()
+    {
+        player.GetComponent<Player>().TakeDamage();
     }
 
     public void TakeTurn()
     {
         if (!isAlive) return;
 
-        if(isAnimating)
+        else if (isAnimating)
         {
             transform.position = desiredMove;
             mapManager.Unreserve(prevPosition);
             isAnimating = false;
         }
 
-        // check if in range
-        var range = mapManager.ManhattanDistance(transform.position, player.transform.position);
-
-        // attack if so
-        if(range <= 1)
+        if(CanAttack())
         {
-            player.GetComponent<Player>().TakeDamage();
+            Attack();
+            return;
         }
-        else
-        {
-            // move if not
-            // pathfind on every movement. it's fine!!
-            var path = mapManager.GetPath(transform.position, player.transform.position);
 
-            if (path.Count > 1)
-            {
-                Vector3Int nextMove = path[1];
-                Vector3 nextPos = mapManager.map.GetCellCenterWorld(nextMove);
+        if (TryMove()) return;
 
-                //check collision against others (and don't collide with self)
-                var hit = Physics2D.BoxCast(nextPos, new Vector2(0.5f, 0.5f), 0f, Vector2.zero, 0f);
-                if ((hit.collider == null || hit.collider.gameObject == gameObject) && !mapManager.IsReserved(nextPos))
-                {
-                    // move to next square
-                    SetMove(nextPos);
-                    Debug.DrawLine(transform.position, nextPos, Color.green, 3f);
-                }
-                else
-                {
-                    Debug.DrawLine(transform.position, nextPos, Color.blue, 3f);
-                }
-            }
-        }
+        // idle, recover
+        isRecovering = false;
     }
 
     public void TakeDamage()
