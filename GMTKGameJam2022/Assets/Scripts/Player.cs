@@ -379,7 +379,7 @@ public class Player: MonoBehaviour
             Vector2Int enemyGridPos = new Vector2Int(tilespace.x, tilespace.y);
             if(spaceToAttack == enemyGridPos)
             {
-                Debug.Log("Sliced.");
+                //Debug.Log("Sliced.");
                 enemies[i].GetComponent<EnemyBase>().TakeDamage();
             }
         }
@@ -411,7 +411,7 @@ public class Player: MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(map.CellToWorld(new Vector3Int(gridPos.x, gridPos.y, 0)), raycastDir);
         if(hit.collider.CompareTag("Enemy"))
         {
-            Debug.Log("Sniped.");
+            //Debug.Log("Sniped.");
             hit.collider.gameObject.GetComponent<EnemyBase>().TakeDamage();
         }
     }
@@ -428,7 +428,7 @@ public class Player: MonoBehaviour
             {
                 if(enemyGridPos == affectedSpaces[j])
                 {
-                    Debug.Log("Toasted.");
+                    //Debug.Log("Toasted.");
                     enemies[i].GetComponent<EnemyBase>().TakeDamage();
                     break;
                 }
@@ -448,7 +448,7 @@ public class Player: MonoBehaviour
             {
                 if (enemyGridPos == affectedSpaces[j])
                 {
-                    Debug.Log("Diced.");
+                    //Debug.Log("Diced.");
                     enemies[i].GetComponent<EnemyBase>().TakeDamage();
                     break;
                 }
