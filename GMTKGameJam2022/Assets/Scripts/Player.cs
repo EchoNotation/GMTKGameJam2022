@@ -42,8 +42,8 @@ public class Player: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        map = GameObject.Find("Controller").GetComponent<MapManager>().map;
         controller = GameObject.Find("Controller");
+        map = controller.GetComponent<MapManager>().map;
 
         dice = new Die[3];
         gridPos = new Vector2Int();
@@ -163,6 +163,7 @@ public class Player: MonoBehaviour
 
     private void UseAbility(int abilityIndex)
     {
+        if(state != PlayerState.IDLE) return;
         if(resourceQuantities[abilityIndex] <= 0) return;
         resourceQuantities[abilityIndex]--;
 
