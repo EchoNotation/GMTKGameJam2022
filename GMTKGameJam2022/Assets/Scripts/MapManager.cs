@@ -163,6 +163,8 @@ public class MapManager : MonoBehaviour
 
     public bool GetWalkable(Vector3Int tilePosition)
     {
+        if (IsReserved(tilePosition)) return true;
+
         var tileProperties = GetTileData(tilePosition);
         if (tileProperties)
         {
