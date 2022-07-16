@@ -66,7 +66,7 @@ public class Player: MonoBehaviour
 
         dice[0].InitializeMove();
         dice[1].InitializeMelee();
-        dice[2].InitializeRanged();
+        dice[2].InitializeMagic();
 
         UpdateGridPosition();
         UpdateWorldPosition();

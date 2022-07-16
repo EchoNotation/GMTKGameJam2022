@@ -18,7 +18,7 @@ public class Die
     private int[] quantities = new int[6];
     private Roll current;
 
-    private bool fastRolling = true;
+    private bool fastRolling = false;
     private bool rolling = false;
     private int ticksLeft;
     private int ticksToNextChange;
