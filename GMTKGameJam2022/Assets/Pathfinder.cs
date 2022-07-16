@@ -94,20 +94,17 @@ public class Pathfinder
             g = 0
         };
 
-        open.Enqueue(startNode, 0);
+        open.Enqueue(startNode, 0f);
 
         bool success = false;
         Node<T> end = null;
 
-        int loopCount = 0;
-
-        while (open.Count > 0 && closed.Count < abort && loopCount < 100)
+        while (open.Count > 0 && closed.Count < abort)
         {
-            loopCount++;
             Node<T> current = open.Dequeue();
             closed.Add(current.value);
 
-            Debug.Log($"considering {current.value}");
+            // Debug.Log($"considering {current.value}");
 
             if (evaluate(current.value))
             {
@@ -122,17 +119,27 @@ public class Pathfinder
 
                 if (closed.Contains(neighbor))
                 {
-                    Debug.Log($"I have a neighbor {neighbor} already considered");
+                    //Debug.Log($"I have a neighbor {neighbor} already considered");
                     continue;
                 }
-                else Debug.Log($"I have a neighbor {neighbor} not already considered");
+                //else Debug.Log($"I have a neighbor {neighbor} not already considered");
                     
 
                 var tentativeG = current.g + cost(current.value, neighbor);
-                Debug.Log($"cost {tentativeG}");
+                //Debug.Log($"cost {tentativeG}");
 
                 // find the referenced node or create new
-                var neighborNode = map.GetValueOrDefault(neighbor, new Node<T>(neighbor, current));
+                // var neighborNode = map.GetValueOrDefault(neighbor, new Node<T>(neighbor, current));
+                Node<T> neighborNode;
+                if(map.ContainsKey(neighbor))
+                {
+                    neighborNode = map[neighbor];
+                }
+                else
+                {
+                    neighborNode = new Node<T>(neighbor, current);
+                    map[neighbor] = neighborNode;
+                }
 
                 if (tentativeG < neighborNode.g || !open.Contains(neighborNode))
                 {
@@ -140,11 +147,11 @@ public class Pathfinder
                     neighborNode.parent = current;
                     neighborNode.g = tentativeG;
                     neighborNode.h = hEstimator(neighbor);
-                    Debug.Log($"new cost");
+                    //Debug.Log($"new cost");
 
                     if (!open.Contains(neighborNode))
                     {
-                        Debug.Log($"adding to queue");
+                        //Debug.Log($"adding to queue");
                         open.Enqueue(neighborNode, neighborNode.f);
                     }
                 }
@@ -152,7 +159,7 @@ public class Pathfinder
         }
 
         sw.Stop();
-        Debug.Log("completed task");
+        // Debug.Log("completed task");
 
         if (success)
         {
