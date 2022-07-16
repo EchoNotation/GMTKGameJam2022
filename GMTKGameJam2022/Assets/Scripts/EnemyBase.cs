@@ -8,7 +8,6 @@ public class EnemyBase : MonoBehaviour
     public float animateMoveTime = 0.5f;
     GameObject player;
 
-    bool isMoving = false;
     Vector3 desiredMove;
     float timeStartMove;
     Vector3 prevPosition;
