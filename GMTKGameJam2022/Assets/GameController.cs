@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
             {
                 Vector3Int nextMove = path[1];
                 Vector3 nextPos = mapManager.map.GetCellCenterWorld(nextMove);
-                enemyController.SetMove();
+                // enemyController.SetMove();
             }
         }
 
