@@ -60,9 +60,7 @@ public class Player: MonoBehaviour
         dice[1].InitializeMelee();
         dice[2].InitializeRanged();
 
-        gridPos.x = 15;
-        gridPos.y = 7;
-
+        UpdateGridPosition();
         UpdateWorldPosition();
     }
 
@@ -165,6 +163,13 @@ public class Player: MonoBehaviour
     private void UpdateWorldPosition()
     {
         transform.position = map.GetCellCenterWorld(new Vector3Int(gridPos.x, gridPos.y, 0));
+    }
+
+    private void UpdateGridPosition()
+    {
+        Vector3Int tilePos = map.WorldToCell(transform.position);
+        gridPos.x = tilePos.x;
+        gridPos.y = tilePos.y;
     }
 
     private void UseAbility(int abilityIndex)
