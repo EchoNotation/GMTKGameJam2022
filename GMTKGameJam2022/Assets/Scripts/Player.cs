@@ -34,9 +34,15 @@ public class Player: MonoBehaviour
     private const int stepsPerMove = 5;
     private int stepsRemaining;
 
+    private GameObject controller;
+    private Tilemap map;
+
     // Start is called before the first frame update
     void Start()
     {
+        map = GameObject.Find("Controller").GetComponent<MapManager>().map;
+        controller = GameObject.Find("Controller");
+
         dice = new Die[3];
         gridPos = new Vector2Int();
         resourceQuantities = new int[3];
@@ -149,7 +155,6 @@ public class Player: MonoBehaviour
 
     private void UpdateWorldPosition()
     {
-        Tilemap map = GameObject.Find("Controller").GetComponent<MapManager>().map;
         transform.position = map.GetCellCenterWorld(new Vector3Int(gridPos.x, gridPos.y, 0));
     }
 
@@ -253,7 +258,7 @@ public class Player: MonoBehaviour
     private void AttemptMovement(Vector2Int spaceToMoveTo)
     {
         //Also need to poll the list of entities to see if there is something in the new tile...
-        bool passable = GameObject.Find("Controller").GetComponent<MapManager>().GetWalkable(spaceToMoveTo);
+        bool passable = controller.GetComponent<MapManager>().GetWalkable(spaceToMoveTo);
 
         if(passable)
         {
@@ -267,9 +272,18 @@ public class Player: MonoBehaviour
 
     private void AttemptMelee(Vector2Int spaceToAttack)
     {
-        //Get list of all enemies from the game controller
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            Vector3Int tilespace = map.WorldToCell(enemies[i].GetComponent<EnemyBase>().transform.position);
+            Vector2Int enemyGridPos = new Vector2Int(tilespace.x, tilespace.y);
+            if(spaceToAttack == enemyGridPos)
+            {
+                Debug.Log("Hit!");
+                enemies[i].GetComponent<EnemyBase>().TakeDamage();
+            }
+        }
     }
 
     private void AttemptSpell(Vector2Int[] affectedSpaces)
@@ -284,6 +298,10 @@ public class Player: MonoBehaviour
 
     public void TakeDamage()
     {
-
+        health--;
+        if(health <= 0)
+        {
+            Debug.Log("Dead");
+        }
     }
 }
