@@ -20,9 +20,13 @@ public class MapManager : MonoBehaviour
         public TileProperties tileProperties;
     }
 
+    // spaces that are reserved by enemies moving into them
+    HashSet<Vector3Int> reservedSpaces;
+
     // Start is called before the first frame update
     void Start()
     {
+        reservedSpaces = new HashSet<Vector3Int>();
         pathfinder = new Pathfinder();
         tileData = new Dictionary<TileBase, TileProperties>();
         foreach (var m in tileMapper)
@@ -100,6 +104,61 @@ public class MapManager : MonoBehaviour
             return null;
         else
             return tileData[tile];
+    }
+
+    public bool IsReserved(Vector3 pos)
+    {
+        return IsReserved(map.WorldToCell(pos));
+    }
+
+    /// <summary>
+    /// check if a position is reserved
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns></returns>
+    public bool IsReserved(Vector3Int pos)
+    {
+        return reservedSpaces.Contains(pos);
+    }
+
+    public bool Reserve(Vector3 pos)
+    {
+        return Reserve(map.WorldToCell(pos));
+    }
+
+    /// <summary>
+    /// reserve a position
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns>true if successful, false if already reserved</returns>
+    public bool Reserve(Vector3Int pos)
+    {
+        if (IsReserved(pos)) return false;
+        else
+        {
+            reservedSpaces.Add(pos);
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// unserve a position
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns>true if successful</returns>
+    public bool Unreserve(Vector3Int pos)
+    {
+        if (IsReserved(pos))
+        {
+            reservedSpaces.Remove(pos);
+            return true;
+        }
+        else return false;
+    }
+
+    public bool Unreserve(Vector3 pos)
+    {
+        return Unreserve(map.WorldToCell(pos));
     }
 
     public bool GetWalkable(Vector3Int tilePosition)

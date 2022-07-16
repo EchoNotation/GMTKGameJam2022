@@ -22,6 +22,14 @@ public class EnemyBase : MonoBehaviour
         desiredMove = prevPosition;
         mapManager = GameObject.Find("Controller").GetComponent<MapManager>();
         player = GameObject.FindGameObjectWithTag("Player");
+        SnapToGrid();
+    }
+
+    void SnapToGrid()
+    {
+        Vector3Int cellPos = mapManager.map.WorldToCell(transform.position);
+        Vector3 pos = mapManager.map.GetCellCenterWorld(cellPos);
+        transform.position = pos;
     }
 
     void Update()
@@ -30,6 +38,12 @@ public class EnemyBase : MonoBehaviour
         {
             float dt = Mathf.Clamp01((Time.realtimeSinceStartup - timeStartMove) / animateMoveTime);
             transform.position = Vector3.Lerp(prevPosition, desiredMove, dt);
+
+            if(dt >= 1)
+            {
+                Debug.DrawLine(transform.position, prevPosition, Color.cyan, 2f);
+                mapManager.Unreserve(prevPosition);
+            }
         }
     }
 
@@ -38,6 +52,7 @@ public class EnemyBase : MonoBehaviour
         desiredMove = pos;
         timeStartMove = Time.realtimeSinceStartup;
         prevPosition = transform.position;
+        mapManager.Reserve(desiredMove);        
     }
 
     public void TakeTurn()
@@ -65,17 +80,16 @@ public class EnemyBase : MonoBehaviour
 
                 //check collision against others (and don't collide with self)
                 var hit = Physics2D.BoxCast(nextPos, new Vector2(0.5f, 0.5f), 0f, Vector2.zero, 0f);
-                if (hit.collider == null || hit.collider.gameObject == gameObject)
+                if ((hit.collider == null || hit.collider.gameObject == gameObject) && !mapManager.IsReserved(nextPos))
                 {
                     // move to next square
                     SetMove(nextPos);
-                    Debug.DrawLine(transform.position, nextPos, Color.green);
+                    Debug.DrawLine(transform.position, nextPos, Color.green, 3f);
                 }
                 else
                 {
                     Debug.DrawLine(transform.position, nextPos, Color.blue, 3f);
                 }
-
             }
         }
     }
@@ -83,6 +97,7 @@ public class EnemyBase : MonoBehaviour
     public void TakeDamage()
     {
         isAlive = false;
+        mapManager.Unreserve(desiredMove);
         Destroy(gameObject);
     } 
 }
