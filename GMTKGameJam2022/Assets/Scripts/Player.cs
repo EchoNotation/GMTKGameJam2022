@@ -413,7 +413,7 @@ public class Player: MonoBehaviour
         {
             Vector3Int tilespace = map.WorldToCell(enemies[i].GetComponent<EnemyBase>().transform.position);
             Vector2Int enemyGridPos = new Vector2Int(tilespace.x, tilespace.y);
-            for(int j = 0; i < affectedSpaces.Length; j++)
+            for(int j = 0; j < affectedSpaces.Length; j++)
             {
                 if(enemyGridPos == affectedSpaces[j])
                 {
@@ -433,7 +433,7 @@ public class Player: MonoBehaviour
         {
             Vector3Int tilespace = map.WorldToCell(enemies[i].GetComponent<EnemyBase>().transform.position);
             Vector2Int enemyGridPos = new Vector2Int(tilespace.x, tilespace.y);
-            for (int j = 0; i < affectedSpaces.Length; j++)
+            for (int j = 0; j < affectedSpaces.Length; j++)
             {
                 if (enemyGridPos == affectedSpaces[j])
                 {
@@ -443,6 +443,9 @@ public class Player: MonoBehaviour
                 }
             }
         }
+
+        gridPos = affectedSpaces[dashRange - 1];
+        UpdateWorldPosition();
     }
 
     public void TakeDamage()
