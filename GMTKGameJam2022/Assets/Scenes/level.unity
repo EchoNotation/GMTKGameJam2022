@@ -191,12 +191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99603f5660ad7dc4d96dfeae40f19f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 10
-  initialSpawnCount: 2
-  spawnCountIncrease: 2
-  turnCount: 0
-  spawnCount: 0
-  enemiesLeftToSpawn: 0
+  spawnRate: 15
+  initialSpawnCount: 1
+  spawnCountIncrease: 1
 --- !u!1001 &220108699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -206,7 +203,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 807736251898776645, guid: cbf34224d2ea2cb4f8a4294b1fad5032, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 807736251898776645, guid: cbf34224d2ea2cb4f8a4294b1fad5032, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1387,7 +1384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2667621383692118515, guid: 550c49be8a683f6429afa72e4b67e4a0, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2667621383692118515, guid: 550c49be8a683f6429afa72e4b67e4a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29179,7 +29176,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1878318022
 GameObject:
