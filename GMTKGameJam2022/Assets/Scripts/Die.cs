@@ -40,7 +40,7 @@ public class Die
 
     public void InitializeMove()
     {
-        Resource[] res = { Resource.BLANK, Resource.MOVE, Resource.MOVE, Resource.MOVE, Resource.MOVE, Resource.MOVE };
+        Resource[] res = { Resource.MOVE, Resource.MOVE, Resource.MOVE, Resource.MOVE, Resource.MOVE, Resource.MOVE };
         int[] qnt = { 1, 1, 1, 2, 2, 2 };
 
         Initialize(res, qnt);

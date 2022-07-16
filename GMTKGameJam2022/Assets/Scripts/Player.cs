@@ -104,7 +104,6 @@ public class Player: MonoBehaviour
         switch (state)
         {
             case PlayerState.IDLE:
-                //Debug.Log("Idling");
                 break;
             case PlayerState.RELOADING:
                 state = PlayerState.AIMING_RANGED;
