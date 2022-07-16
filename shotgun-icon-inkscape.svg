@@ -33,7 +33,7 @@
      inkscape:cx="101.5661"
      inkscape:cy="122.67411"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer2"
      showgrid="false"
      units="px"
      inkscape:window-width="1920"
@@ -61,19 +61,21 @@
      transform="translate(0,-229.26665)"
      style="display:inline;opacity:0.9">
     <rect
-       style="opacity:1;fill:#fb000a;fill-opacity:1;stroke:#000000;stroke-width:2.48668289;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       style="opacity:1;fill:#a73aff;fill-opacity:1;stroke:#000000;stroke-width:2.48668289;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
        id="rect815"
        width="65.245995"
        height="65.247215"
        x="1.2497085"
        y="230.51601"
-       ry="0.061870109" />
+       ry="0.061870109"
+       inkscape:export-xdpi="96.000008"
+       inkscape:export-ydpi="96.000008" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="shotgun_ref"
-     style="display:none">
+     style="display:none;opacity:0.96">
     <image
        style="display:inline;opacity:0.9"
        y="176.28679"
@@ -7563,7 +7565,8 @@ XYq7FXYq7FXYq7FXYq7FXYq//9k=
   <g
      inkscape:groupmode="layer"
      id="layer4"
-     inkscape:label="stock">
+     inkscape:label="stock"
+     style="display:inline">
     <path
        transform="translate(0,-229.26665)"
        style="display:inline;opacity:0.9;fill:#c87137;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
