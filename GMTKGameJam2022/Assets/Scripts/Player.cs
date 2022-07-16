@@ -66,21 +66,28 @@ public class Player: MonoBehaviour
         switch (state)
         {
             case PlayerState.IDLE:
-                Debug.Log("Idling");
+                //Debug.Log("Idling");
                 break;
             case PlayerState.MOVING:
-                AttemptMovement(FindTargetedPositions(dir)[0]);
+                AttemptMovement(FindNeighboringPosition(dir));
                 stepsRemaining--;
                 if(stepsRemaining <= 0) state = PlayerState.IDLE;
                 break;
             case PlayerState.AIMING_MELEE:
-                AttemptMelee(FindTargetedPositions(dir));
+                AttemptMelee(FindNeighboringPosition(dir));
+                state = PlayerState.IDLE;
                 break;
             case PlayerState.AIMING_RANGED:
+                Debug.Log("Not implemented");
+                state = PlayerState.IDLE;
                 break;
             case PlayerState.AIMING_DASH:
+                Debug.Log("Not implemented");
+                state = PlayerState.IDLE;
                 break;
             case PlayerState.AIMING_SPELL:
+                AttemptSpell(FindSpellAffectedPositions(dir));
+                state = PlayerState.IDLE;
                 break;
         }
     }
@@ -98,41 +105,68 @@ public class Player: MonoBehaviour
         dice[dieIndex].Roll();
     }
 
-    private Vector2Int[] FindTargetedPositions(Direction dir)
+    private Vector2Int FindNeighboringPosition(Direction dir)
     {
-        List<Vector2Int> squares = new List<Vector2Int>();
         Vector2Int square = gridPos;
 
-        switch (state)
+        switch(dir)
         {
-            case PlayerState.IDLE:
+            case Direction.UP:
+                square.y++;
                 break;
-            case PlayerState.MOVING:
-            case PlayerState.AIMING_MELEE:
-                switch(dir)
-                {
-                    case Direction.UP:
-                        square.y++;
-                        break;
-                    case Direction.LEFT:
-                        square.x--;
-                        break;
-                    case Direction.RIGHT:
-                        square.x++;
-                        break;
-                    case Direction.DOWN:
-                        square.y--;
-                        break;
-                }
-                squares.Add(square);
-
+            case Direction.LEFT:
+                square.x--;
                 break;
-            case PlayerState.AIMING_SPELL:
+            case Direction.RIGHT:
+                square.x++;
                 break;
-            case PlayerState.AIMING_RANGED:
+            case Direction.DOWN:
+                square.y--;
                 break;
         }
 
+        return square;
+    }
+
+    private Vector2Int[] FindSpellAffectedPositions(Direction dir)
+    {
+        List<Vector2Int> squares = new List<Vector2Int>();
+        int[] upXOffsets = { 0, -1, 0, 1, -1, 0, 1, -2, -1, 0, 1, 2, -2, -1, 0, 1, 2};
+        int[] upYOffsets = { 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5 };
+        int[] downXOffsets = { 0, -1, 0, 1, -1, 0, 1, -2, -1, 0, 1, 2, -2, -1, 0, 1, 2 };
+        int[] downYOffsets = { -1, -2, -2, -2, -3, -3, -3, -4, -4, -4, -4, -4, -5, -5, -5, -5, -5 };
+        int[] leftXOffsets = { -1, -2, -2, -2, -3, -3, -3, -4, -4, -4, -4, -4, -5, -5, -5, -5, -5 };
+        int[] leftYOffsets = { 0, -1, 0, 1, -1, 0, 1, -2, -1, 0, 1, 2, -2, -1, 0, 1, 2 };
+        int[] rightXOffsets = { 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5 };
+        int[] rightYOffsets = { 0, -1, 0, 1, -1, 0, 1, -2, -1, 0, 1, 2, -2, -1, 0, 1, 2 };
+
+        int[] xOffsets = new int[upXOffsets.Length];
+        int[] yOffsets = new int[upYOffsets.Length];
+
+        switch (dir)
+        {
+            case Direction.UP:
+                xOffsets = upXOffsets;
+                yOffsets = upYOffsets;
+                break;
+            case Direction.LEFT:
+                xOffsets = leftXOffsets;
+                yOffsets = leftYOffsets;
+                break;
+            case Direction.RIGHT:
+                xOffsets = rightXOffsets;
+                yOffsets = rightYOffsets;
+                break;
+            case Direction.DOWN:
+                xOffsets = downXOffsets;
+                yOffsets = downYOffsets;
+                break;
+        }
+
+        for(int i = 0; i < xOffsets.Length; i++)
+        {
+            squares.Add(new Vector2Int(xOffsets[i], yOffsets[i]));
+        }
 
         return squares.ToArray();
     }
@@ -153,11 +187,20 @@ public class Player: MonoBehaviour
 
     }
 
-    private void AttemptMelee(Vector2Int[] spacesToAttack)
+    private void AttemptMelee(Vector2Int spaceToAttack)
     {
-        for(int i = 0; i < spacesToAttack.Length; i++)
-        {
+        //Get list of all enemies from the game controller
 
-        }
+        
+    }
+
+    private void AttemptSpell(Vector2Int[] affectedSpaces)
+    {
+
+    }
+
+    private void AttemptRanged(Vector2Int[] affectedSpaces)
+    {
+
     }
 }
