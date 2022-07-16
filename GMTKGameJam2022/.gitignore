@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# the bane of Thomas' existence
+"Assets\Plugins\Priority Queue.csproj.meta"
+
