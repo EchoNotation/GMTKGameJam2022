@@ -28,6 +28,33 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    public int GetWidth()
+    {
+        return map.cellBounds.xMax;
+    }
+
+    public int GetHeight()
+    {
+        return map.cellBounds.yMax;
+    }
+
+    public List<Vector3Int> GetWalkableNeighbors(Vector3Int pos)
+    {
+        var res = new List<Vector3Int>();
+
+        var newPos = new Vector3Int();
+        // walrus := ?
+        if (GetWalkable(newPos = pos + new Vector3Int(0, 1)))
+            res.Add(newPos);
+        if (GetWalkable(newPos = pos + new Vector3Int(1, 0)))
+            res.Add(newPos);
+        if (GetWalkable(newPos = pos + new Vector3Int(-1, 0)))
+            res.Add(newPos);
+        if (GetWalkable(newPos = pos + new Vector3Int(0, -1)))
+            res.Add(newPos);
+
+        return res;
+    }
 
     public TileProperties GetTileData(Vector3Int tilePosition)
     {
