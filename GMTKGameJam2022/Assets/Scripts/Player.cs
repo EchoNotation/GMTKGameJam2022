@@ -165,21 +165,7 @@ public class Player: MonoBehaviour
     {
         uiManager.SetScore(score);
         uiManager.SetCombo(comboMultiplier);
-
-        switch (health)
-        {
-            case 0:
-                uiManager.DisableHeart(0);
-                goto case 1;
-            case 1:
-                uiManager.DisableHeart(1);
-                goto case 2;
-            case 2:
-                uiManager.DisableHeart(2);
-                break;
-            case 3:
-                break;
-        }
+        uiManager.SetHealth(health);
 
         for (int i = 0; i < dice.Length; i++)
         {
