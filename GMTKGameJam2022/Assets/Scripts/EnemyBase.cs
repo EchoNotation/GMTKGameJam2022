@@ -71,7 +71,6 @@ public class EnemyBase : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("im stuck");
                     Debug.DrawLine(transform.position, nextPos, Color.blue, 3f);
                 }
 
