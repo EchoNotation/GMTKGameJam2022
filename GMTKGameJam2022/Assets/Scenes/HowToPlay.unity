@@ -516,12 +516,24 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "At the start of each turn, the dice corresponding to each ability you
-    selected will be rolled. \n\nIn order to use an ability, press 1, 2, or 3 depending
-    on which slot it is in.  Move and aim abilities using WASD.\n\nYou must finish
-    using an ability before you can select another one, and your turn ends when you
-    use all of the rolled resources.\n\nTry and survive for as long as you can. Good
-    luck!"
+  m_Text: 'The dice you selected will be rolled at the start of the turn.
+
+
+    In
+    order to use a die''s ability press 1, 2, or 3 depending on which slot it is
+    in.  Move and aim abilities using WASD.
+
+
+    You must finish using an ability
+    before you can select another one, and your turn ends when you use all of the
+    abilities you rolled.
+
+
+    Get multikills and maintain combos for high scores.
+
+
+    Try
+    and survive for as long as you can. Good luck!'
 --- !u!222 &1743720623
 CanvasRenderer:
   m_ObjectHideFlags: 0
