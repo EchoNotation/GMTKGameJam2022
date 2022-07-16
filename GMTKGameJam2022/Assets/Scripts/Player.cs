@@ -57,11 +57,11 @@ public class Player: MonoBehaviour
         dice[2] = new Die();
 
         dice[0].InitializeMove();
-        dice[1].InitializeMelee();
-        dice[2].InitializeDash();
+        dice[1].InitializeRanged();
+        dice[2].InitializeMagic();
 
-        gridPos.x = 2;
-        gridPos.y = 2;
+        gridPos.x = 13;
+        gridPos.y = 6;
 
         UpdateWorldPosition();
     }
@@ -338,7 +338,7 @@ public class Player: MonoBehaviour
 
         for(int i = 0; i < xOffsets.Length; i++)
         {
-            squares.Add(new Vector2Int(xOffsets[i], yOffsets[i]));
+            squares.Add(new Vector2Int(gridPos.x + xOffsets[i], gridPos.y + yOffsets[i]));
         }
 
         return squares.ToArray();
