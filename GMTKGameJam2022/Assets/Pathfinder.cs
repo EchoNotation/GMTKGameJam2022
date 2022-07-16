@@ -99,10 +99,15 @@ public class Pathfinder
         bool success = false;
         Node<T> end = null;
 
-        while (open.Count > 0 && closed.Count < abort)
+        int loopCount = 0;
+
+        while (open.Count > 0 && closed.Count < abort && loopCount < 100)
         {
+            loopCount++;
             Node<T> current = open.Dequeue();
             closed.Add(current.value);
+
+            Debug.Log($"considering {current.value}");
 
             if (evaluate(current.value))
             {
@@ -113,10 +118,18 @@ public class Pathfinder
 
             foreach (var neighbor in getNeighbors(current.value))
             {
+
+
                 if (closed.Contains(neighbor))
+                {
+                    Debug.Log($"I have a neighbor {neighbor} already considered");
                     continue;
+                }
+                else Debug.Log($"I have a neighbor {neighbor} not already considered");
+                    
 
                 var tentativeG = current.g + cost(current.value, neighbor);
+                Debug.Log($"cost {tentativeG}");
 
                 // find the referenced node or create new
                 var neighborNode = map.GetValueOrDefault(neighbor, new Node<T>(neighbor, current));
@@ -127,8 +140,11 @@ public class Pathfinder
                     neighborNode.parent = current;
                     neighborNode.g = tentativeG;
                     neighborNode.h = hEstimator(neighbor);
+                    Debug.Log($"new cost");
+
                     if (!open.Contains(neighborNode))
                     {
+                        Debug.Log($"adding to queue");
                         open.Enqueue(neighborNode, neighborNode.f);
                     }
                 }
@@ -136,6 +152,7 @@ public class Pathfinder
         }
 
         sw.Stop();
+        Debug.Log("completed task");
 
         if (success)
         {
