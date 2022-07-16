@@ -15,11 +15,11 @@ public class PlayerUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        brain.GetComponent<SpriteRenderer>().sprite = brainSprites[3];
+        brain.GetComponent<Image>().sprite= brainSprites[3];
 
         for(int i = 0; i < icons.Length; i++)
         {
-            icons[i].GetComponent<SpriteRenderer>().sprite = blank;
+            icons[i].GetComponent<Image>().sprite = blank;
             quantities[i].GetComponent<Text>().text = "x0";
         }
     }
@@ -31,7 +31,7 @@ public class PlayerUIManager : MonoBehaviour
 
     public void SetHealth(int health)
     {
-        brain.GetComponent<SpriteRenderer>().sprite = brainSprites[health];
+        brain.GetComponent<Image>().sprite = brainSprites[health];
     }
 
     public void SetCombo(int comboMultiplier)
@@ -83,7 +83,7 @@ public class PlayerUIManager : MonoBehaviour
                 break;
         }
 
-        icons[iconIndex].GetComponent<SpriteRenderer>().sprite = temp;
+        icons[iconIndex].GetComponent<Image>().sprite = temp;
         quantities[iconIndex].GetComponent<Text>().text = $"x{qnt}";
     }
 
