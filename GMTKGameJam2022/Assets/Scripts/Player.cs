@@ -30,6 +30,7 @@ public class Player: MonoBehaviour
     public int health;
     public PlayerState state;
     private int[] resourceQuantities;
+    private bool rollingDice;
 
     private int score;
     private int comboMultiplier;
@@ -55,6 +56,7 @@ public class Player: MonoBehaviour
         gridPos = new Vector2Int();
         resourceQuantities = new int[3];
         health = 3;
+        rollingDice = false;
 
         state = PlayerState.IDLE;
 
@@ -73,6 +75,26 @@ public class Player: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool temp = false;
+
+        if(rollingDice)
+        {
+            for(int i = 0; i < dice.Length; i++)
+            {
+                temp = temp | dice[i].IsRolling();
+            }
+
+            //Need to wait for all dice to stop rolling before player can take any action
+            if (temp) return;
+
+            rollingDice = false;
+
+            for(int i = 0; i < dice.Length; i++)
+            {
+                resourceQuantities[i] = dice[i].GetResult().quantity;
+            }
+        }
+
         //check for user input
         Direction dir = Direction.NONE;
 
@@ -151,13 +173,31 @@ public class Player: MonoBehaviour
         controller.GetComponent<GameController>().NextMove();
     }
 
+    private void FixedUpdate()
+    {
+        //Update dice rolling animation
+        for(int i = 0; i < dice.Length; i++)
+        {
+            if (dice[i].IsRolling())
+            {
+                dice[i].TickAnimation();
+            }
+        }
+
+        for(int i = 0; i < dice.Length; i++)
+        {
+            //uiManager.UpdateCurrency(i, dice[i].GetResult().res, dice[i].GetResult().quantity);
+        }
+    }
+
     private void RollAllDice()
     {
+        rollingDice = true;
+
         for(int i = 0; i < dice.Length; i++)
         {
             dice[i].Roll();
-            resourceQuantities[i] = dice[i].GetResult().quantity;
-            Debug.Log($"Die {i} got quantity {resourceQuantities[i]}");
+            //Debug.Log($"Die {i} got quantity {resourceQuantities[i]}");
         }
     }
 

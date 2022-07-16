@@ -18,12 +18,19 @@ public class Die
     private int[] quantities = new int[6];
     private Roll current;
 
-    private bool fastRolling = false;
-
+    private bool fastRolling = true;
+    private bool rolling = false;
+    private int ticksLeft;
+    private int ticksToNextChange;
 
     public Roll GetResult()
     {
         return current;
+    }
+
+    public bool IsRolling()
+    {
+        return rolling;
     }
 
     public void Roll()
@@ -34,13 +41,56 @@ public class Die
             current = new Roll(faces[chosenFace], quantities[chosenFace]);
             return;
         }
-        
 
+        //Takes 1 to 3 seconds to roll
+        ticksLeft = Random.Range(60, 181);
+        rolling = true;
+        ticksToNextChange = 0;
     }
 
     public void TickAnimation()
     {
-        if(!fastRolling) return;
+        if(ticksLeft <= 0)
+        {
+            //End rolling and confirm selection
+            rolling = false;
+            ticksLeft = 0;
+            ticksToNextChange = 0;
+        }
+
+        if(ticksToNextChange <= 0)
+        {
+            //Determine what the new face is, and reset ticksToNextChange
+            int chosenFace = Random.Range(0, 6);
+            current = new Roll(faces[chosenFace], quantities[chosenFace]);
+
+            if(ticksLeft > 150)
+            {
+                ticksToNextChange = 5;
+            }
+            else if(ticksLeft > 120)
+            {
+                ticksToNextChange = 10;
+            }
+            else if(ticksLeft > 90)
+            {
+                ticksToNextChange = 15;
+            }
+            else if(ticksLeft > 60)
+            {
+                ticksToNextChange = 20;
+            }
+            else if(ticksLeft > 30)
+            {
+                ticksToNextChange = 25;
+            }
+        }
+        else
+        {
+            ticksToNextChange--;
+        }
+
+        ticksLeft--;
     }
 
     public void Initialize(Resource[] newFaces, int[] newQuantities)
