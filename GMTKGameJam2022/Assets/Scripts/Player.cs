@@ -64,9 +64,38 @@ public class Player: MonoBehaviour
         dice[1] = new Die();
         dice[2] = new Die();
 
-        dice[0].InitializeMove();
-        dice[1].InitializeMelee();
-        dice[2].InitializeRanged();
+        bool[] selectedDice = GameObject.FindGameObjectWithTag("DieLoader").GetComponent<DieLoader>().GetSelectedDice();
+
+        int nextToAllocate = 0;
+        for(int i = 0; i < selectedDice.Length; i++)
+        {
+            if(selectedDice[i])
+            {
+                switch(i)
+                {
+                    case 0:
+                        dice[nextToAllocate].InitializeMove();
+                        break;
+                    case 1:
+                        dice[nextToAllocate].InitializeMelee();
+                        break;
+                    case 2:
+                        dice[nextToAllocate].InitializeRanged();
+                        break;
+                    case 3:
+                        dice[nextToAllocate].InitializeMagic();
+                        break;
+                    case 4:
+                        dice[nextToAllocate].InitializeDash();
+                        break;
+                    default:
+                        Debug.Log("Invalid index from DieLoader!");
+                        break;
+                }
+
+                nextToAllocate++;
+            }
+        }
 
         UpdateGridPosition();
         UpdateWorldPosition();

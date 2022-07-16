@@ -52,6 +52,8 @@ public class MainMenuController : MonoBehaviour
         //Do some transfer logic
         if(numSelected != 3) return;
 
+        GameObject.FindGameObjectWithTag("DieLoader").GetComponent<DieLoader>().SetSelectedDice(selectedDice);
+
         SceneManager.LoadScene("Level");
     }
 
