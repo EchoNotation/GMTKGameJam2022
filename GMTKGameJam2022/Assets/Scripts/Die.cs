@@ -66,23 +66,23 @@ public class Die
 
             if(ticksLeft > 150)
             {
-                ticksToNextChange = 5;
+                ticksToNextChange = 10;
             }
             else if(ticksLeft > 120)
             {
-                ticksToNextChange = 10;
+                ticksToNextChange = 20;
             }
             else if(ticksLeft > 90)
             {
-                ticksToNextChange = 15;
+                ticksToNextChange = 30;
             }
             else if(ticksLeft > 60)
             {
-                ticksToNextChange = 20;
+                ticksToNextChange = 40;
             }
             else if(ticksLeft > 30)
             {
-                ticksToNextChange = 25;
+                ticksToNextChange = 50;
             }
         }
         else
