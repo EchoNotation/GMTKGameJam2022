@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -520,7 +520,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c6648df37efb81546ae015893b0dd0e6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1041,9 +1041,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: d6e9a97645069e44b8844cdc1f6c4354, type: 3}
     - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
+      propertyPath: move
+      value: 
+      objectReference: {fileID: 21300000, guid: 43d6080a008b15b4e923b5889af758a3, type: 3}
+    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
       propertyPath: brain
       value: 
       objectReference: {fileID: 532991639}
+    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
+      propertyPath: rifle
+      value: 
+      objectReference: {fileID: 21300000, guid: 4742bc61aa621514581c1dce3b375bca, type: 3}
     - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
       propertyPath: score
       value: 
@@ -29026,7 +29034,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 43d6080a008b15b4e923b5889af758a3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29095,7 +29103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -29220,7 +29228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
