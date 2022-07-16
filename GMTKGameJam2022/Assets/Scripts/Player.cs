@@ -99,6 +99,7 @@ public class Player: MonoBehaviour
 
         UpdateGridPosition();
         UpdateWorldPosition();
+        UpdateInterface();
     }
 
     // Update is called once per frame
@@ -211,7 +212,7 @@ public class Player: MonoBehaviour
             if (dice[i].IsRolling())
             {
                 dice[i].TickAnimation();
-                uiManager.UpdateCurrency(i, dice[i].GetResult().res, dice[i].GetResult().quantity);
+                uiManager.UpdateCurrency(i, dice[i].GetResource(), dice[i].GetResult().quantity);
             }
         }
     }
@@ -223,7 +224,6 @@ public class Player: MonoBehaviour
         for(int i = 0; i < dice.Length; i++)
         {
             dice[i].Roll();
-            //Debug.Log($"Die {i} got quantity {resourceQuantities[i]}");
         }
     }
 
@@ -232,10 +232,11 @@ public class Player: MonoBehaviour
         uiManager.SetScore(score);
         uiManager.SetCombo(comboMultiplier);
         uiManager.SetHealth(health);
+        uiManager.SetStepsRemaining(stepsRemaining);
 
         for (int i = 0; i < dice.Length; i++)
         {
-            uiManager.UpdateCurrency(i, dice[i].GetResult().res, resourceQuantities[i]);
+            uiManager.UpdateCurrency(i, dice[i].GetResource(), resourceQuantities[i]);
         }
     }
 
@@ -262,6 +263,7 @@ public class Player: MonoBehaviour
             case Resource.MOVE:
                 state = PlayerState.MOVING;
                 stepsRemaining = stepsPerMove;
+                UpdateInterface();
                 break;
             case Resource.MELEE:
                 state = PlayerState.AIMING_MELEE;

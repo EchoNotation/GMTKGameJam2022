@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    public GameObject score, comboText, comboCounter, brain;
+    public GameObject score, comboText, comboCounter, stepText, stepCounter, brain;
     public Sprite blank, axe, move, rifle, shotgun, dash;
 
     public Sprite[] brainSprites = new Sprite[4];
@@ -46,6 +46,21 @@ public class PlayerUIManager : MonoBehaviour
             comboText.GetComponent<Text>().enabled = true;
             comboCounter.GetComponent<Text>().enabled = true;
             comboCounter.GetComponent<Text>().text = $"x{comboMultiplier}";
+        }
+    }
+
+    public void SetStepsRemaining(int stepsRemaining)
+    {
+        if(stepsRemaining == 0)
+        {
+            stepText.GetComponent<Text>().enabled = false;
+            stepCounter.GetComponent<Text>().enabled = false;
+        }
+        else
+        {
+            stepText.GetComponent<Text>().enabled = true;
+            stepCounter.GetComponent<Text>().enabled = true;
+            stepCounter.GetComponent<Text>().text = $"{stepsRemaining}";
         }
     }
 
