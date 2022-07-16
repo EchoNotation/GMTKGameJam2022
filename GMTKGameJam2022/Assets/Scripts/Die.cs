@@ -7,14 +7,14 @@ public enum Resource
     BLANK,
     MOVE,
     MELEE,
-    RANGED,
+    RIFLE,
     DASH,
-    MAGIC,
+    SHOTGUN,
 }
 
 public class Die
 {
-    private Resource[] faces = new Resource[6];
+    private Resource type;
     private int[] quantities = new int[6];
     private Roll current;
 
@@ -22,6 +22,11 @@ public class Die
     private bool rolling = false;
     private int ticksLeft;
     private int ticksToNextChange;
+
+    public Resource GetResource()
+    {
+        return type;
+    }
 
     public Roll GetResult()
     {
@@ -38,7 +43,7 @@ public class Die
         if(fastRolling)
         {
             int chosenFace = Random.Range(0, 6);
-            current = new Roll(faces[chosenFace], quantities[chosenFace]);
+            current = new Roll(type, quantities[chosenFace]);
             return;
         }
 
@@ -62,7 +67,7 @@ public class Die
         {
             //Determine what the new face is, and reset ticksToNextChange
             int chosenFace = Random.Range(0, 6);
-            current = new Roll(faces[chosenFace], quantities[chosenFace]);
+            current = new Roll(type, quantities[chosenFace]);
 
             if(ticksLeft > 150)
             {
@@ -93,18 +98,19 @@ public class Die
         ticksLeft--;
     }
 
-    public void Initialize(Resource[] newFaces, int[] newQuantities)
+    public void Initialize(Resource newResource, int[] newQuantities)
     {
-        for (int i = 0; i < faces.Length; i++)
+        type = newResource;
+
+        for (int i = 0; i < quantities.Length; i++)
         {
-            faces[i] = newFaces[i];
             quantities[i] = newQuantities[i];
         }
     }
 
     public void InitializeMove()
     {
-        Resource[] res = { Resource.MOVE, Resource.MOVE, Resource.MOVE, Resource.MOVE, Resource.MOVE, Resource.MOVE };
+        Resource res = Resource.MOVE;
         int[] qnt = { 1, 1, 1, 2, 2, 2 };
 
         Initialize(res, qnt);
@@ -112,31 +118,31 @@ public class Die
 
     public void InitializeMelee()
     {
-        Resource[] res = { Resource.MELEE, Resource.MELEE, Resource.MELEE, Resource.MELEE, Resource.MELEE, Resource.MELEE };
-        int[] qnt = { 0, 1, 1, 2, 2, 3 };
+        Resource res = Resource.MELEE;
+        int[] qnt = { 1, 1, 1, 2, 2, 3 };
 
         Initialize(res, qnt);
     }
 
-    public void InitializeRanged()
+    public void InitializeRifle()
     {
-        Resource[] res = { Resource.RANGED, Resource.RANGED, Resource.RANGED, Resource.RANGED, Resource.RANGED, Resource.RANGED };
-        int[] qnt = { 0, 0, 0, 1, 1, 2 };
+        Resource res = Resource.RIFLE;
+        int[] qnt = { 0, 0, 1, 1, 1, 2 };
 
         Initialize(res, qnt);
     }
 
     public void InitializeDash()
     {
-        Resource[] res = { Resource.DASH, Resource.DASH, Resource.DASH, Resource.DASH, Resource.DASH, Resource.DASH };
-        int[] qnt = { 0, 0, 0, 0, 1, 1 };
+        Resource res = Resource.DASH;
+        int[] qnt = { 0, 0, 0, 1, 1, 1 };
 
         Initialize(res, qnt);
     }
 
-    public void InitializeMagic()
+    public void InitializeShotgun()
     {
-        Resource[] res = { Resource.MAGIC, Resource.MAGIC, Resource.MAGIC, Resource.MAGIC, Resource.MAGIC, Resource.MAGIC };
+        Resource res = Resource.SHOTGUN;
         int[] qnt = { 0, 0, 0, 0, 1, 1 };
 
         Initialize(res, qnt);

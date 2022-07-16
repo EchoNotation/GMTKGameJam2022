@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    public GameObject score, comboText, comboCounter, brain;
+    public GameObject score, comboText, comboCounter, stepText, stepCounter, brain;
     public Sprite blank, axe, move, rifle, shotgun, dash;
 
     public Sprite[] brainSprites = new Sprite[4];
@@ -49,6 +49,21 @@ public class PlayerUIManager : MonoBehaviour
         }
     }
 
+    public void SetStepsRemaining(int stepsRemaining)
+    {
+        if(stepsRemaining == 0)
+        {
+            stepText.GetComponent<Text>().enabled = false;
+            stepCounter.GetComponent<Text>().enabled = false;
+        }
+        else
+        {
+            stepText.GetComponent<Text>().enabled = true;
+            stepCounter.GetComponent<Text>().enabled = true;
+            stepCounter.GetComponent<Text>().text = $"{stepsRemaining}";
+        }
+    }
+
     public void SetScore(int newScore)
     {
         score.GetComponent<Text>().text = $"{newScore}";
@@ -69,10 +84,10 @@ public class PlayerUIManager : MonoBehaviour
             case Resource.MELEE:
                 temp = axe;
                 break;
-            case Resource.RANGED:
+            case Resource.RIFLE:
                 temp = rifle;
                 break;
-            case Resource.MAGIC:
+            case Resource.SHOTGUN:
                 temp = shotgun;
                 break;
             case Resource.DASH:
