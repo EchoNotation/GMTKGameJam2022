@@ -31,6 +31,8 @@ public class Player: MonoBehaviour
     public PlayerState state;
     private int[] resourceQuantities;
 
+    private const int dashRange = 5;
+
     private const int stepsPerMove = 5;
     private int stepsRemaining;
 
@@ -87,6 +89,7 @@ public class Player: MonoBehaviour
             dir = Direction.RIGHT;
         }
 
+        //Temporary code
         if(Input.GetKeyDown(KeyCode.Space))
         {
             RollAllDice();
@@ -124,11 +127,11 @@ public class Player: MonoBehaviour
                 state = PlayerState.IDLE;
                 break;
             case PlayerState.AIMING_RANGED:
-                Debug.Log("Not implemented");
+                AttemptRanged(dir);
                 state = PlayerState.IDLE;
                 break;
             case PlayerState.AIMING_DASH:
-                Debug.Log("Not implemented");
+                AttemptDash(FindDashAffectedPositions(dir));
                 state = PlayerState.IDLE;
                 break;
             case PlayerState.AIMING_SPELL:
@@ -210,6 +213,91 @@ public class Player: MonoBehaviour
         return square;
     }
 
+    /*private Vector2Int[] FindRangedAffectedPositions(Direction dir)
+    {
+        List<Vector2Int> squares = new List<Vector2Int>();
+        Vector2Int targetPos = new Vector2Int(gridPos.x, gridPos.y);
+
+        switch (dir)
+        {
+            case Direction.UP:
+                targetPos.y++;
+                break;
+            case Direction.DOWN:
+                targetPos.y--;
+                break;
+            case Direction.LEFT:
+                targetPos.x--;
+                break;
+            case Direction.RIGHT:
+                targetPos.x++;
+                break;
+            case Direction.NONE:
+                Debug.Log("You shouldn't be here!");
+                return squares.ToArray();
+        }
+
+        while (controller.GetComponent<MapManager>().GetWalkable(targetPos))
+        {
+            squares.Add(targetPos);
+
+            switch (dir)
+            {
+                case Direction.UP:
+                    targetPos.y++;
+                    break;
+                case Direction.DOWN:
+                    targetPos.y--;
+                    break;
+                case Direction.LEFT:
+                    targetPos.x--;
+                    break;
+                case Direction.RIGHT:
+                    targetPos.x++;
+                    break;
+                case Direction.NONE:
+                    Debug.Log("You shouldn't be here!");
+                    return squares.ToArray();
+            }
+        }
+
+        return squares.ToArray();
+    }*/
+
+    private Vector2Int[] FindDashAffectedPositions(Direction dir)
+    {
+        List<Vector2Int> squares = new List<Vector2Int>();
+        int xPos = gridPos.x;
+        int yPos = gridPos.y;
+
+        for(int i = 0; i < dashRange; i++)
+        {
+            
+            switch(dir)
+            {
+                case Direction.UP:
+                    yPos++;
+                    break;
+                case Direction.DOWN:
+                    yPos--;
+                    break;
+                case Direction.LEFT:
+                    xPos--;
+                    break;
+                case Direction.RIGHT:
+                    xPos++;
+                    break;
+                case Direction.NONE:
+                    Debug.Log("You shouldn't be here!");
+                    return squares.ToArray();
+            }
+
+            squares.Add(new Vector2Int(xPos, yPos));
+        }
+
+        return squares.ToArray();
+    }
+
     private Vector2Int[] FindSpellAffectedPositions(Direction dir)
     {
         List<Vector2Int> squares = new List<Vector2Int>();
@@ -280,20 +368,81 @@ public class Player: MonoBehaviour
             Vector2Int enemyGridPos = new Vector2Int(tilespace.x, tilespace.y);
             if(spaceToAttack == enemyGridPos)
             {
-                Debug.Log("Hit!");
+                Debug.Log("Sliced.");
                 enemies[i].GetComponent<EnemyBase>().TakeDamage();
             }
         }
     }
 
-    private void AttemptSpell(Vector2Int[] affectedSpaces)
+    private void AttemptRanged(Direction dir)
     {
+        Vector2 raycastDir = Vector2.up;
 
+        switch(dir)
+        {
+            case Direction.UP:
+                raycastDir = Vector2.up;
+                break;
+            case Direction.DOWN:
+                raycastDir = Vector2.down;
+                break;
+            case Direction.LEFT:
+                raycastDir = Vector2.left;
+                break;
+            case Direction.RIGHT:
+                raycastDir = Vector2.right;
+                break;
+            case Direction.NONE:
+                Debug.Log("You shouldn't be here!");
+                return;
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(map.CellToWorld(new Vector3Int(gridPos.x, gridPos.y, 0)), raycastDir);
+        if(hit.collider.CompareTag("Enemy"))
+        {
+            Debug.Log("Sniped.");
+            hit.collider.gameObject.GetComponent<EnemyBase>().TakeDamage();
+        }
     }
 
-    private void AttemptRanged(Vector2Int[] affectedSpaces)
+    private void AttemptSpell(Vector2Int[] affectedSpaces)
     {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Vector3Int tilespace = map.WorldToCell(enemies[i].GetComponent<EnemyBase>().transform.position);
+            Vector2Int enemyGridPos = new Vector2Int(tilespace.x, tilespace.y);
+            for(int j = 0; i < affectedSpaces.Length; j++)
+            {
+                if(enemyGridPos == affectedSpaces[j])
+                {
+                    Debug.Log("Toasted.");
+                    enemies[i].GetComponent<EnemyBase>().TakeDamage();
+                    break;
+                }
+            }
+        }
+    }
+
+    private void AttemptDash(Vector2Int[] affectedSpaces)
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Vector3Int tilespace = map.WorldToCell(enemies[i].GetComponent<EnemyBase>().transform.position);
+            Vector2Int enemyGridPos = new Vector2Int(tilespace.x, tilespace.y);
+            for (int j = 0; i < affectedSpaces.Length; j++)
+            {
+                if (enemyGridPos == affectedSpaces[j])
+                {
+                    Debug.Log("Diced.");
+                    enemies[i].GetComponent<EnemyBase>().TakeDamage();
+                    break;
+                }
+            }
+        }
     }
 
     public void TakeDamage()
