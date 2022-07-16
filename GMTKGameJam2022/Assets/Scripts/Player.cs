@@ -25,25 +25,32 @@ public enum PlayerState
 
 public class Player: MonoBehaviour
 {
-    private List<Die> dice;
+    private Die[] dice;
     public Vector2Int gridPos;
     public int health;
     public PlayerState state;
-    private Resource[] resources;
+    private int[] resourceQuantities;
 
-    private int stepsPerMove = 5;
+    private const int stepsPerMove = 5;
     private int stepsRemaining;
 
     // Start is called before the first frame update
     void Start()
     {
-        dice = new List<Die>();
+        dice = new Die[3];
         gridPos = new Vector2Int();
-        resources = new Resource[5];
+        resourceQuantities = new int[3];
         health = 3;
 
-        state = PlayerState.MOVING;
-        stepsRemaining = stepsPerMove;
+        state = PlayerState.IDLE;
+
+        dice[0] = new Die();
+        dice[1] = new Die();
+        dice[2] = new Die();
+
+        dice[0].InitializeMove();
+        dice[1].InitializeMelee();
+        dice[2].InitializeDash();
 
         gridPos.x = 2;
         gridPos.y = 2;
@@ -72,6 +79,24 @@ public class Player: MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.D))
         {
             dir = Direction.RIGHT;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            RollAllDice();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            UseAbility(0);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            UseAbility(1);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            UseAbility(2);
         }
 
         if (dir == Direction.NONE) return;
@@ -110,9 +135,11 @@ public class Player: MonoBehaviour
 
     private void RollAllDice()
     {
-        for(int i = 0; i < dice.Count; i++)
+        for(int i = 0; i < dice.Length; i++)
         {
             dice[i].Roll();
+            resourceQuantities[i] = dice[i].GetResult().quantity;
+            Debug.Log($"Die {i} got quantity {resourceQuantities[i]}");
         }
     }
 
@@ -125,6 +152,35 @@ public class Player: MonoBehaviour
     {
         Tilemap map = GameObject.Find("Controller").GetComponent<MapManager>().map;
         transform.position = map.GetCellCenterWorld(new Vector3Int(gridPos.x, gridPos.y, 0));
+    }
+
+    private void UseAbility(int abilityIndex)
+    {
+        if(resourceQuantities[abilityIndex] <= 0) return;
+        resourceQuantities[abilityIndex]--;
+
+        switch(dice[abilityIndex].GetResult().res)
+        {
+            case Resource.MOVE:
+                state = PlayerState.MOVING;
+                stepsRemaining = stepsPerMove;
+                break;
+            case Resource.MELEE:
+                state = PlayerState.AIMING_MELEE;
+                break;
+            case Resource.RANGED:
+                state = PlayerState.RELOADING;
+                break;
+            case Resource.DASH:
+                state = PlayerState.AIMING_DASH;
+                break;
+            case Resource.MAGIC:
+                state = PlayerState.AIMING_SPELL;
+                break;
+            case Resource.BLANK:
+                Debug.Log("You shouldn't be here!");
+                break;
+        }
     }
 
     private Vector2Int FindNeighboringPosition(Direction dir)
@@ -197,7 +253,6 @@ public class Player: MonoBehaviour
 
     private void AttemptMovement(Vector2Int spaceToMoveTo)
     {
-        //Tile = MapManager.GetTile(newX, newY);
         //Also need to poll the list of entities to see if there is something in the new tile...
         bool passable = GameObject.Find("Controller").GetComponent<MapManager>().GetWalkable(spaceToMoveTo);
 
@@ -205,8 +260,6 @@ public class Player: MonoBehaviour
         {
             gridPos.x = spaceToMoveTo.x;
             gridPos.y = spaceToMoveTo.y;
-
-            Debug.Log($"X: {gridPos.x} Y: {gridPos.y}");
 
             UpdateWorldPosition();
         }

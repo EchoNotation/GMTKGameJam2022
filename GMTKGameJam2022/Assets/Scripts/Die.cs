@@ -12,28 +12,21 @@ public enum Resource
     MAGIC,
 }
 
-public class Die : MonoBehaviour
+public class Die
 {
     private Resource[] faces = new Resource[6];
     private int[] quantities = new int[6];
-    private Resource currentFace;
-    // Start is called before the first frame update
-    void Start()
-    {
-        for (int i = 0; i < faces.Length; i++)
-        {
-            faces[i] = Resource.BLANK;
-        }
-    }
+    private Roll current;
 
-    public Resource GetTopFace()
+    public Roll GetResult()
     {
-        return currentFace;
+        return current;
     }
 
     public void Roll()
     {
-        currentFace = faces[Random.Range(0, 6)];
+        int chosenFace = Random.Range(0, 6);
+        current = new Roll(faces[chosenFace], quantities[chosenFace]);
     }
 
     public void Initialize(Resource[] newFaces, int[] newQuantities)
@@ -85,4 +78,16 @@ public class Die : MonoBehaviour
         Initialize(res, qnt);
     }
 
+}
+
+public class Roll
+{
+    public Resource res;
+    public int quantity;
+
+    public Roll(Resource res, int quantity)
+    {
+        this.res = res;
+        this.quantity = quantity;
+    }
 }
