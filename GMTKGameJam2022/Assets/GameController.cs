@@ -60,7 +60,8 @@ public class GameController : MonoBehaviour
             if(path.Count > 1)
             {
                 Vector3Int nextMove = path[1];
-                enemyController.SetMove(mapManager.map.GetCellCenterWorld(nextMove));
+                Vector3 nextPos = mapManager.map.GetCellCenterWorld(nextMove);
+                enemyController.SetMove();
             }
         }
 

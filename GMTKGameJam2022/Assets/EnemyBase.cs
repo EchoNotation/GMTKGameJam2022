@@ -13,7 +13,6 @@ public class EnemyBase : MonoBehaviour
 
     public void SetMove(Vector3 pos)
     {
-        // todo make it move smoothly
         desiredMove = pos;
         timeStartMove = Time.realtimeSinceStartup;
         prevPosition = transform.position;
@@ -26,6 +25,11 @@ public class EnemyBase : MonoBehaviour
     }
 
     public void Attack(Vector3 pos)
+    {
+
+    }
+
+    public void TakeDamage()
     {
 
     }
