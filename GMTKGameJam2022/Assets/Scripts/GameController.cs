@@ -6,9 +6,9 @@ public class GameController : MonoBehaviour
     public int initialSpawnCount = 2;
     public int spawnCountIncrease = 2;
 
-    public int turnCount = 0;
-    public int spawnCount = 0;
-    public int enemiesLeftToSpawn = 0;
+    int turnCount = 0;
+    int spawnCount = 0;
+    int enemiesLeftToSpawn = 0;
 
     MapManager mapManager;
 
