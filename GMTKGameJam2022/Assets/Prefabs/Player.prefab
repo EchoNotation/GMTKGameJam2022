@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8202314985196308075}
   - component: {fileID: 1246262875481001301}
   - component: {fileID: 2035197000465004347}
+  - component: {fileID: -3846641406164838322}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -100,3 +101,38 @@ MonoBehaviour:
   gridPos: {x: 0, y: 0}
   health: 0
   state: 0
+--- !u!114 &-3846641406164838322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6604474538722302119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b7800eae4a35945b49a860d1b075c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 0}
+  comboText: {fileID: 0}
+  comboCounter: {fileID: 0}
+  heartFull: {fileID: 0}
+  heartEmpty: {fileID: 0}
+  blank: {fileID: 0}
+  axe: {fileID: 0}
+  move: {fileID: 0}
+  rifle: {fileID: 0}
+  shotgun: {fileID: 0}
+  dash: {fileID: 0}
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  icons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  quantities:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

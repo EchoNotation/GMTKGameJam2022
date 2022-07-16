@@ -31,6 +31,9 @@ public class Player: MonoBehaviour
     public PlayerState state;
     private int[] resourceQuantities;
 
+    private int score;
+    private int comboMultiplier;
+
     private const int dashRange = 5;
 
     private const int stepsPerMove = 5;
@@ -39,11 +42,14 @@ public class Player: MonoBehaviour
     private GameObject controller;
     private Tilemap map;
 
+    private PlayerUIManager uiManager;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GameObject.Find("Controller");
         map = controller.GetComponent<MapManager>().map;
+        uiManager = GetComponent<PlayerUIManager>();
 
         dice = new Die[3];
         gridPos = new Vector2Int();
@@ -157,7 +163,28 @@ public class Player: MonoBehaviour
 
     private void UpdateInterface()
     {
+        uiManager.SetScore(score);
+        uiManager.SetCombo(comboMultiplier);
 
+        switch (health)
+        {
+            case 0:
+                uiManager.DisableHeart(0);
+                goto case 1;
+            case 1:
+                uiManager.DisableHeart(1);
+                goto case 2;
+            case 2:
+                uiManager.DisableHeart(2);
+                break;
+            case 3:
+                break;
+        }
+
+        for (int i = 0; i < dice.Length; i++)
+        {
+            uiManager.UpdateCurrency(i, dice[i].GetResult().res, resourceQuantities[i]);
+        }
     }
 
     private void UpdateWorldPosition()
