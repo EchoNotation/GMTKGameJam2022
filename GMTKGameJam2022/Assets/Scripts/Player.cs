@@ -66,7 +66,7 @@ public class Player: MonoBehaviour
 
         dice[0].InitializeMove();
         dice[1].InitializeMelee();
-        dice[2].InitializeMagic();
+        dice[2].InitializeRanged();
 
         UpdateGridPosition();
         UpdateWorldPosition();
@@ -464,6 +464,7 @@ public class Player: MonoBehaviour
         health--;
         if(health <= 0)
         {
+            health = 0;
             Debug.Log("Dead");
         }
     }
