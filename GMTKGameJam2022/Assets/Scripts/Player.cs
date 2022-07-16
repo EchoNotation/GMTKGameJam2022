@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public enum Direction
 {
@@ -39,6 +40,15 @@ public class Player: MonoBehaviour
         dice = new List<Die>();
         gridPos = new Vector2Int();
         resources = new Resource[5];
+        health = 3;
+
+        state = PlayerState.MOVING;
+        stepsRemaining = stepsPerMove;
+
+        gridPos.x = 2;
+        gridPos.y = 2;
+
+        UpdateWorldPosition();
     }
 
     // Update is called once per frame
@@ -109,6 +119,12 @@ public class Player: MonoBehaviour
     private void UpdateInterface()
     {
 
+    }
+
+    private void UpdateWorldPosition()
+    {
+        Tilemap map = GameObject.Find("Controller").GetComponent<MapManager>().map;
+        transform.position = map.GetCellCenterWorld(new Vector3Int(gridPos.x, gridPos.y, 0));
     }
 
     private Vector2Int FindNeighboringPosition(Direction dir)
@@ -183,8 +199,7 @@ public class Player: MonoBehaviour
     {
         //Tile = MapManager.GetTile(newX, newY);
         //Also need to poll the list of entities to see if there is something in the new tile...
-        bool passable = true;
-
+        bool passable = GameObject.Find("Controller").GetComponent<MapManager>().GetWalkable(spaceToMoveTo);
 
         if(passable)
         {
@@ -192,6 +207,8 @@ public class Player: MonoBehaviour
             gridPos.y = spaceToMoveTo.y;
 
             Debug.Log($"X: {gridPos.x} Y: {gridPos.y}");
+
+            UpdateWorldPosition();
         }
 
     }
