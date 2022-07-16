@@ -5,20 +5,17 @@ using UnityEngine.UI;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    public GameObject score, comboText, comboCounter;
-    public Sprite heartFull, heartEmpty, blank, axe, move, rifle, shotgun, dash;
+    public GameObject score, comboText, comboCounter, brain;
+    public Sprite blank, axe, move, rifle, shotgun, dash;
 
-    public GameObject[] hearts = new GameObject[3];
+    public Sprite[] brainSprites = new Sprite[4];
     public GameObject[] icons = new GameObject[3];
     public GameObject[] quantities = new GameObject[3];
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < hearts.Length; i++)
-        {
-            hearts[i].GetComponent<SpriteRenderer>().sprite = heartFull;
-        }
+        brain.GetComponent<SpriteRenderer>().sprite = brainSprites[3];
 
         for(int i = 0; i < icons.Length; i++)
         {
@@ -32,9 +29,9 @@ public class PlayerUIManager : MonoBehaviour
         //Animate anything if necessary
     }
 
-    public void DisableHeart(int heartIndex)
+    public void SetHealth(int health)
     {
-        hearts[heartIndex].GetComponent<SpriteRenderer>().sprite = heartEmpty;
+        brain.GetComponent<SpriteRenderer>().sprite = brainSprites[health];
     }
 
     public void SetCombo(int comboMultiplier)

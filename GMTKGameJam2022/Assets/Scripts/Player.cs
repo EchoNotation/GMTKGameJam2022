@@ -30,6 +30,7 @@ public class Player: MonoBehaviour
     public int health;
     public PlayerState state;
     private int[] resourceQuantities;
+    private bool rollingDice;
 
     private int score;
     private int comboMultiplier;
@@ -55,6 +56,7 @@ public class Player: MonoBehaviour
         gridPos = new Vector2Int();
         resourceQuantities = new int[3];
         health = 3;
+        rollingDice = false;
 
         state = PlayerState.IDLE;
 
@@ -73,6 +75,26 @@ public class Player: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool temp = false;
+
+        if(rollingDice)
+        {
+            for(int i = 0; i < dice.Length; i++)
+            {
+                temp = temp | dice[i].IsRolling();
+            }
+
+            //Need to wait for all dice to stop rolling before player can take any action
+            if (temp) return;
+
+            rollingDice = false;
+
+            for(int i = 0; i < dice.Length; i++)
+            {
+                resourceQuantities[i] = dice[i].GetResult().quantity;
+            }
+        }
+
         //check for user input
         Direction dir = Direction.NONE;
 
@@ -123,7 +145,7 @@ public class Player: MonoBehaviour
                 Debug.Log("You really shouldn't be here.");
                 break;
             case PlayerState.RELOADING:
-                state = PlayerState.AIMING_RANGED;
+                state = PlayerState.IDLE;
                 break;
             case PlayerState.MOVING:
                 AttemptMovement(FindNeighboringPosition(dir));
@@ -136,7 +158,7 @@ public class Player: MonoBehaviour
                 break;
             case PlayerState.AIMING_RANGED:
                 AttemptRanged(dir);
-                state = PlayerState.IDLE;
+                state = PlayerState.RELOADING;
                 break;
             case PlayerState.AIMING_DASH:
                 AttemptDash(FindDashAffectedPositions(dir));
@@ -151,13 +173,31 @@ public class Player: MonoBehaviour
         controller.GetComponent<GameController>().NextMove();
     }
 
+    private void FixedUpdate()
+    {
+        //Update dice rolling animation
+        for(int i = 0; i < dice.Length; i++)
+        {
+            if (dice[i].IsRolling())
+            {
+                dice[i].TickAnimation();
+            }
+        }
+
+        for(int i = 0; i < dice.Length; i++)
+        {
+            //uiManager.UpdateCurrency(i, dice[i].GetResult().res, dice[i].GetResult().quantity);
+        }
+    }
+
     private void RollAllDice()
     {
+        rollingDice = true;
+
         for(int i = 0; i < dice.Length; i++)
         {
             dice[i].Roll();
-            resourceQuantities[i] = dice[i].GetResult().quantity;
-            Debug.Log($"Die {i} got quantity {resourceQuantities[i]}");
+            //Debug.Log($"Die {i} got quantity {resourceQuantities[i]}");
         }
     }
 
@@ -165,21 +205,7 @@ public class Player: MonoBehaviour
     {
         uiManager.SetScore(score);
         uiManager.SetCombo(comboMultiplier);
-
-        switch (health)
-        {
-            case 0:
-                uiManager.DisableHeart(0);
-                goto case 1;
-            case 1:
-                uiManager.DisableHeart(1);
-                goto case 2;
-            case 2:
-                uiManager.DisableHeart(2);
-                break;
-            case 3:
-                break;
-        }
+        uiManager.SetHealth(health);
 
         for (int i = 0; i < dice.Length; i++)
         {
@@ -215,7 +241,7 @@ public class Player: MonoBehaviour
                 state = PlayerState.AIMING_MELEE;
                 break;
             case Resource.RANGED:
-                state = PlayerState.RELOADING;
+                state = PlayerState.AIMING_RANGED;
                 break;
             case Resource.DASH:
                 state = PlayerState.AIMING_DASH;
