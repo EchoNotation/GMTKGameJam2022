@@ -4,24 +4,40 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
+    public float animateMoveTime = 0.5f;
+
     bool isMoving = false;
-    float animateMoveTime = 1f;
+    Vector3 desiredMove;
+    float timeStartMove;
+    Vector3 prevPosition;
 
     public void SetMove(Vector3 pos)
     {
         // todo make it move smoothly
-        transform.position = pos;
+        desiredMove = pos;
+        timeStartMove = Time.realtimeSinceStartup;
+        prevPosition = transform.position;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        prevPosition = transform.position;
+        desiredMove = prevPosition;
+    }
+
+    public void Attack(Vector3 pos)
+    {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(transform.position != desiredMove)
+        {
+            float dt = Mathf.Clamp01((Time.realtimeSinceStartup - timeStartMove) / animateMoveTime);
+            transform.position = Vector3.Lerp(prevPosition, desiredMove, dt);
     }
+    }
+        
 }

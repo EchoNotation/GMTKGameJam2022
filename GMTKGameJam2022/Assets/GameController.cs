@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Priority_Queue;
 
 public class GameController : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class GameController : MonoBehaviour
         Func<Vector3Int, List<Vector3Int>> getNeighbors = (pos) => mapManager.GetWalkableNeighbors(pos);
         Func<Vector3Int, Vector3Int, float> cost = ManhattanDistance;
         Func<Vector3Int, float> hEstimator = (pos) => Vector3Int.Distance(pos, end);
-        Debug.Log($"{start.ToString()} to {end.ToString()}");
+        // Debug.Log($"{start.ToString()} to {end.ToString()}");
         Pathfinder.PathfinderResult<Vector3Int> res = pathfinder.GetPath(start, evaluate, getNeighbors, cost, hEstimator);
 
         if (res.foundPath)
@@ -56,9 +57,9 @@ public class GameController : MonoBehaviour
             //pathfind on every frame. it's fine!!
             var path = GetPath(mapManager.map.WorldToCell(enemy.transform.position), mapManager.map.WorldToCell(player.transform.position));
 
-            if(path.Count > 0)
+            if(path.Count > 1)
             {
-                Vector3Int nextMove = path[0];
+                Vector3Int nextMove = path[1];
                 enemyController.SetMove(mapManager.map.GetCellCenterWorld(nextMove));
             }
         }
@@ -68,7 +69,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnGUI()
@@ -76,6 +77,14 @@ public class GameController : MonoBehaviour
         if(GUI.Button(new Rect(20, 70, 50, 30), "Test"))
         {
             NextMove();
+
+            // var q = new SimplePriorityQueue<Vector3Int, float>();
+
+            // q.Enqueue(new Vector3Int(0, 1), 0f);
+
+            // Debug.Log(q.Contains(new Vector3Int(0, 1)));
+
+
             /*
             var set = new Dictionary<Vector3Int, bool>();
             set.Add(new Vector3Int(0, 1), true);
