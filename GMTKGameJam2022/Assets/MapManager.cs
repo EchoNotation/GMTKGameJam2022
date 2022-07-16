@@ -79,7 +79,6 @@ public class MapManager : MonoBehaviour
     public bool GetWalkable(Vector2Int tilePosition)
     {
         var tileProperties = GetTileData(new Vector3Int(tilePosition.x, tilePosition.y, 0));
-        Debug.Log(tileProperties);
         if(tileProperties)
         {
             return tileProperties.isWalkable;
