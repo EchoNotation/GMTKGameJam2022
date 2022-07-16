@@ -19,6 +19,7 @@ public enum PlayerState
     AIMING_RANGED,
     AIMING_SPELL,
     AIMING_DASH,
+    RELOADING,
 }
 
 public class Player: MonoBehaviour
@@ -27,6 +28,9 @@ public class Player: MonoBehaviour
     public Vector2Int gridPos;
     public int health;
     public PlayerState state;
+    private Resource[] resources;
+
+    private int stepsPerMove = 5;
     private int stepsRemaining;
 
     // Start is called before the first frame update
@@ -34,8 +38,7 @@ public class Player: MonoBehaviour
     {
         dice = new List<Die>();
         gridPos = new Vector2Int();
-        state = PlayerState.MOVING;
-        stepsRemaining = 4;
+        resources = new Resource[5];
     }
 
     // Update is called once per frame
@@ -67,6 +70,9 @@ public class Player: MonoBehaviour
         {
             case PlayerState.IDLE:
                 //Debug.Log("Idling");
+                break;
+            case PlayerState.RELOADING:
+                state = PlayerState.AIMING_RANGED;
                 break;
             case PlayerState.MOVING:
                 AttemptMovement(FindNeighboringPosition(dir));
@@ -100,9 +106,9 @@ public class Player: MonoBehaviour
         }
     }
 
-    private void RollDie(int dieIndex)
+    private void UpdateInterface()
     {
-        dice[dieIndex].Roll();
+
     }
 
     private Vector2Int FindNeighboringPosition(Direction dir)
@@ -131,6 +137,8 @@ public class Player: MonoBehaviour
     private Vector2Int[] FindSpellAffectedPositions(Direction dir)
     {
         List<Vector2Int> squares = new List<Vector2Int>();
+
+        //This is a little scuffed but whatever
         int[] upXOffsets = { 0, -1, 0, 1, -1, 0, 1, -2, -1, 0, 1, 2, -2, -1, 0, 1, 2};
         int[] upYOffsets = { 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5 };
         int[] downXOffsets = { 0, -1, 0, 1, -1, 0, 1, -2, -1, 0, 1, 2, -2, -1, 0, 1, 2 };
@@ -175,8 +183,9 @@ public class Player: MonoBehaviour
     {
         //Tile = MapManager.GetTile(newX, newY);
         //Also need to poll the list of entities to see if there is something in the new tile...
-
         bool passable = true;
+
+
         if(passable)
         {
             gridPos.x = spaceToMoveTo.x;
