@@ -104,7 +104,6 @@ public class Player: MonoBehaviour
         switch (state)
         {
             case PlayerState.IDLE:
-                //Debug.Log("Idling");
                 break;
             case PlayerState.RELOADING:
                 state = PlayerState.AIMING_RANGED;
@@ -279,6 +278,11 @@ public class Player: MonoBehaviour
     }
 
     private void AttemptRanged(Vector2Int[] affectedSpaces)
+    {
+
+    }
+
+    public void TakeDamage()
     {
 
     }
