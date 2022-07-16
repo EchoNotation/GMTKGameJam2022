@@ -16,6 +16,8 @@ public class EnemyBase : MonoBehaviour
 
     bool isAlive = true;
 
+    bool isAnimating = false;
+
     private void Start()
     {
         prevPosition = transform.position;
@@ -34,15 +36,15 @@ public class EnemyBase : MonoBehaviour
 
     void Update()
     {
-        if (transform.position != desiredMove)
+        if (isAnimating)
         {
             float dt = Mathf.Clamp01((Time.realtimeSinceStartup - timeStartMove) / animateMoveTime);
             transform.position = Vector3.Lerp(prevPosition, desiredMove, dt);
 
             if(dt >= 1)
             {
+                isAnimating = false;
                 Debug.DrawLine(transform.position, prevPosition, Color.cyan, 2f);
-                mapManager.Unreserve(prevPosition);
             }
         }
     }
@@ -52,12 +54,21 @@ public class EnemyBase : MonoBehaviour
         desiredMove = pos;
         timeStartMove = Time.realtimeSinceStartup;
         prevPosition = transform.position;
-        mapManager.Reserve(desiredMove);        
+        mapManager.Reserve(desiredMove);
+        mapManager.Unreserve(prevPosition);
+        isAnimating = true;
     }
 
     public void TakeTurn()
     {
         if (!isAlive) return;
+
+        if(isAnimating)
+        {
+            transform.position = desiredMove;
+            mapManager.Unreserve(prevPosition);
+            isAnimating = false;
+        }
 
         // check if in range
         var range = mapManager.ManhattanDistance(transform.position, player.transform.position);
@@ -99,5 +110,5 @@ public class EnemyBase : MonoBehaviour
         isAlive = false;
         mapManager.Unreserve(desiredMove);
         Destroy(gameObject);
-    } 
+    }
 }
