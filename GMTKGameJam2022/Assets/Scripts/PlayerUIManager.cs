@@ -84,10 +84,10 @@ public class PlayerUIManager : MonoBehaviour
             case Resource.MELEE:
                 temp = axe;
                 break;
-            case Resource.RANGED:
+            case Resource.RIFLE:
                 temp = rifle;
                 break;
-            case Resource.MAGIC:
+            case Resource.SHOTGUN:
                 temp = shotgun;
                 break;
             case Resource.DASH:

@@ -7,9 +7,9 @@ public enum Resource
     BLANK,
     MOVE,
     MELEE,
-    RANGED,
+    RIFLE,
     DASH,
-    MAGIC,
+    SHOTGUN,
 }
 
 public class Die
@@ -124,9 +124,9 @@ public class Die
         Initialize(res, qnt);
     }
 
-    public void InitializeRanged()
+    public void InitializeRifle()
     {
-        Resource res = Resource.RANGED;
+        Resource res = Resource.RIFLE;
         int[] qnt = { 0, 0, 1, 1, 1, 2 };
 
         Initialize(res, qnt);
@@ -140,9 +140,9 @@ public class Die
         Initialize(res, qnt);
     }
 
-    public void InitializeMagic()
+    public void InitializeShotgun()
     {
-        Resource res = Resource.MAGIC;
+        Resource res = Resource.SHOTGUN;
         int[] qnt = { 0, 0, 0, 0, 1, 1 };
 
         Initialize(res, qnt);

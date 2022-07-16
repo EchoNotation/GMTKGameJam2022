@@ -17,8 +17,8 @@ public enum PlayerState
     IDLE,
     MOVING,
     AIMING_MELEE,
-    AIMING_RANGED,
-    AIMING_SPELL,
+    AIMING_RIFLE,
+    AIMING_SHOTGUN,
     AIMING_DASH,
     RELOADING,
 }
@@ -80,10 +80,10 @@ public class Player: MonoBehaviour
                         dice[nextToAllocate].InitializeMelee();
                         break;
                     case 2:
-                        dice[nextToAllocate].InitializeRanged();
+                        dice[nextToAllocate].InitializeRifle();
                         break;
                     case 3:
-                        dice[nextToAllocate].InitializeMagic();
+                        dice[nextToAllocate].InitializeShotgun();
                         break;
                     case 4:
                         dice[nextToAllocate].InitializeDash();
@@ -186,16 +186,16 @@ public class Player: MonoBehaviour
                 AttemptMelee(FindNeighboringPosition(dir));
                 state = PlayerState.IDLE;
                 break;
-            case PlayerState.AIMING_RANGED:
-                AttemptRanged(dir);
+            case PlayerState.AIMING_RIFLE:
+                AttemptRifle(dir);
                 state = PlayerState.RELOADING;
                 break;
             case PlayerState.AIMING_DASH:
                 AttemptDash(FindDashAffectedPositions(dir));
                 state = PlayerState.IDLE;
                 break;
-            case PlayerState.AIMING_SPELL:
-                AttemptSpell(FindSpellAffectedPositions(dir));
+            case PlayerState.AIMING_SHOTGUN:
+                AttemptShotgun(FindShotgunAffectedPositions(dir));
                 state = PlayerState.IDLE;
                 break;
         }
@@ -268,14 +268,14 @@ public class Player: MonoBehaviour
             case Resource.MELEE:
                 state = PlayerState.AIMING_MELEE;
                 break;
-            case Resource.RANGED:
-                state = PlayerState.AIMING_RANGED;
+            case Resource.RIFLE:
+                state = PlayerState.AIMING_RIFLE;
                 break;
             case Resource.DASH:
                 state = PlayerState.AIMING_DASH;
                 break;
-            case Resource.MAGIC:
-                state = PlayerState.AIMING_SPELL;
+            case Resource.SHOTGUN:
+                state = PlayerState.AIMING_SHOTGUN;
                 break;
             case Resource.BLANK:
                 Debug.Log("You shouldn't be here!");
@@ -340,7 +340,7 @@ public class Player: MonoBehaviour
         return squares.ToArray();
     }
 
-    private Vector2Int[] FindSpellAffectedPositions(Direction dir)
+    private Vector2Int[] FindShotgunAffectedPositions(Direction dir)
     {
         List<Vector2Int> squares = new List<Vector2Int>();
 
@@ -416,7 +416,7 @@ public class Player: MonoBehaviour
         }
     }
 
-    private void AttemptRanged(Direction dir)
+    private void AttemptRifle(Direction dir)
     {
         Vector2 raycastDir = Vector2.up;
 
@@ -447,7 +447,7 @@ public class Player: MonoBehaviour
         }
     }
 
-    private void AttemptSpell(Vector2Int[] affectedSpaces)
+    private void AttemptShotgun(Vector2Int[] affectedSpaces)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
