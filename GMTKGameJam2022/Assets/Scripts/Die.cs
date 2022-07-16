@@ -113,7 +113,7 @@ public class Die
     public void InitializeMelee()
     {
         Resource[] res = { Resource.MELEE, Resource.MELEE, Resource.MELEE, Resource.MELEE, Resource.MELEE, Resource.MELEE };
-        int[] qnt = { 0, 1, 1, 2, 2, 3 };
+        int[] qnt = { 1, 1, 1, 2, 2, 3 };
 
         Initialize(res, qnt);
     }
@@ -121,7 +121,7 @@ public class Die
     public void InitializeRanged()
     {
         Resource[] res = { Resource.RANGED, Resource.RANGED, Resource.RANGED, Resource.RANGED, Resource.RANGED, Resource.RANGED };
-        int[] qnt = { 0, 0, 0, 1, 1, 2 };
+        int[] qnt = { 0, 0, 1, 1, 1, 2 };
 
         Initialize(res, qnt);
     }
@@ -129,7 +129,7 @@ public class Die
     public void InitializeDash()
     {
         Resource[] res = { Resource.DASH, Resource.DASH, Resource.DASH, Resource.DASH, Resource.DASH, Resource.DASH };
-        int[] qnt = { 0, 0, 0, 0, 1, 1 };
+        int[] qnt = { 0, 0, 0, 1, 1, 1 };
 
         Initialize(res, qnt);
     }
