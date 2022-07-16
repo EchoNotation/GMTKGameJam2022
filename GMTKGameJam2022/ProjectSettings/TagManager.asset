@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - DieLoader
+  - Spawner
   layers:
   - Default
   - TransparentFX

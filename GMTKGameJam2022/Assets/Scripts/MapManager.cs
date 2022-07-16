@@ -13,6 +13,8 @@ public class MapManager : MonoBehaviour
 
     public List<TileMapper> tileMapper;
 
+    public GameObject spawnerPrefab;
+
     [System.Serializable]
     public struct TileMapper
     {
@@ -32,6 +34,11 @@ public class MapManager : MonoBehaviour
         foreach (var m in tileMapper)
         {
             tileData[m.tile] = m.tileProperties;
+
+            if(m.tileProperties.isSpawner)
+            {
+                ((Tile)m.tile).gameObject = spawnerPrefab;
+            }
         }
     }
 

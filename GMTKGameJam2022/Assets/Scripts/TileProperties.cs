@@ -7,4 +7,5 @@ using UnityEngine.Tilemaps;
 public class TileProperties : ScriptableObject
 {
     public bool isWalkable;
+    public bool isSpawner = false;
 }
