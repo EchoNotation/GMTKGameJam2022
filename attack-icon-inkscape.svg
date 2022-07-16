@@ -16,7 +16,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="attack-icon-inkscape.svg">
+   sodipodi:docname="attack-icon-inkscape.svg"
+   inkscape:export-filename="D:\Documents\datalad\GMTKGameJam2022\attack-1-icon.png"
+   inkscape:export-xdpi="96.000008"
+   inkscape:export-ydpi="96.000008">
   <defs
      id="defs2">
     <linearGradient
@@ -49,18 +52,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="107.72706"
-     inkscape:cy="118.62696"
+     inkscape:zoom="2"
+     inkscape:cx="99.624259"
+     inkscape:cy="121.37505"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
      inkscape:window-width="1920"
      inkscape:window-height="1001"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="true" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -79,24 +83,13 @@
      id="layer1"
      transform="translate(0,-229.26665)">
     <rect
-       style="opacity:1;fill:#fb8e00;fill-opacity:1;stroke:#000000;stroke-width:2.48395967;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       style="opacity:1;fill:#fb8e00;fill-opacity:1;stroke:#000000;stroke-width:2.48668289;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
        id="rect815"
-       width="65.241997"
-       height="65.108368"
-       x="1.3890456"
-       y="230.63622"
-       ry="0.06173845" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:27.2007618px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.68001902"
-       x="31.735632"
-       y="288.77899"
-       id="text853"><tspan
-         sodipodi:role="line"
-         id="tspan851"
-         x="31.735632"
-         y="288.77899"
-         style="stroke-width:0.68001902">x1</tspan></text>
+       width="65.245995"
+       height="65.247215"
+       x="1.2497085"
+       y="230.51601"
+       ry="0.061870109" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -124,7 +117,7 @@
     <path
        transform="rotate(26.1745)"
        style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#f0f0f0;stroke-width:0;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
-       d="m 33.971403,32.266738 3.998892,-0.07896 c 0.03628,-7.17e-4 -0.0265,1.797066 -0.02651,1.798403 l -0.03548,3.78692 c -0.0029,0.305236 1.860353,11.377505 1.015698,11.880985 -3.660076,2.18169 -5.097772,-0.121791 -5.39583,-0.670443 -0.02407,-0.04431 -0.199456,-0.406084 -0.239452,-0.669396 -0.19602,-1.290484 0.614426,-6.104428 0.614844,-6.444079 l 0.111808,-1.90387 c 0,0 0.0079,-6.109467 -0.04397,-7.699561 z"
+       d="m 33.971403,32.266738 3.998892,-0.07896 c 0.03628,-7.17e-4 -0.0265,1.797066 -0.02651,1.798403 l -0.03548,3.78692 c -0.0029,0.305236 1.860353,11.377505 1.015698,11.880985 -3.660076,2.18169 -5.097772,-0.121791 -5.39583,-0.670443 -0.02407,-0.04431 -0.199456,-0.406084 -0.239452,-0.669396 -0.19602,-1.290484 0.614426,-6.104428 0.614844,-6.444079 l 0.111808,-1.90387 c 0,0 0.0079,-6.109467 -0.04397,-7.69956 z"
        id="rect855"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="csssssssccc" />
