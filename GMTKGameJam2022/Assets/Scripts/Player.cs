@@ -145,7 +145,7 @@ public class Player: MonoBehaviour
                 Debug.Log("You really shouldn't be here.");
                 break;
             case PlayerState.RELOADING:
-                state = PlayerState.AIMING_RANGED;
+                state = PlayerState.IDLE;
                 break;
             case PlayerState.MOVING:
                 AttemptMovement(FindNeighboringPosition(dir));
@@ -158,7 +158,7 @@ public class Player: MonoBehaviour
                 break;
             case PlayerState.AIMING_RANGED:
                 AttemptRanged(dir);
-                state = PlayerState.IDLE;
+                state = PlayerState.RELOADING;
                 break;
             case PlayerState.AIMING_DASH:
                 AttemptDash(FindDashAffectedPositions(dir));
@@ -241,7 +241,7 @@ public class Player: MonoBehaviour
                 state = PlayerState.AIMING_MELEE;
                 break;
             case Resource.RANGED:
-                state = PlayerState.RELOADING;
+                state = PlayerState.AIMING_RANGED;
                 break;
             case Resource.DASH:
                 state = PlayerState.AIMING_DASH;
