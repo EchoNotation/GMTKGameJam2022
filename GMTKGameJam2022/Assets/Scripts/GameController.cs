@@ -35,14 +35,14 @@ public class GameController : MonoBehaviour
         {
             enemiesLeftToSpawn = spawnCount;
             spawnCount += spawnCountIncrease;
-            Debug.Log("spawn began");
+            // Debug.Log("spawn began");
         }
 
         if(enemiesLeftToSpawn > 0)
         {
             GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
             Shuffle(spawners);
-            Debug.Log($"{spawners.Length} spawners found");
+            // Debug.Log($"{spawners.Length} spawners found");
 
             for(int i = 0; i < spawners.Length && enemiesLeftToSpawn > 0; i++)
             {
@@ -66,5 +66,4 @@ public class GameController : MonoBehaviour
             array[k] = temp;
         }
     }
-
 }

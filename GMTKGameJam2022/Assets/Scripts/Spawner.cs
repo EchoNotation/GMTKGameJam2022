@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour
     {
         mapManager = GameObject.Find("Controller").GetComponent<MapManager>();
         SnapToGrid();
-        Debug.Log("spawner  online");
+        // Debug.Log("spawner  online");
     }
 
     void SnapToGrid()
