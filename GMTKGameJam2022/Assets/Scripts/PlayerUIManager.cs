@@ -24,11 +24,6 @@ public class PlayerUIManager : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        //Animate anything if necessary
-    }
-
     public void SetHealth(int health)
     {
         brain.GetComponent<Image>().sprite = brainSprites[health];
@@ -36,7 +31,7 @@ public class PlayerUIManager : MonoBehaviour
 
     public void SetCombo(int comboMultiplier)
     {
-        if(comboMultiplier == 0)
+        if(comboMultiplier <= 1)
         {
             comboText.GetComponent<Text>().enabled = false;
             comboCounter.GetComponent<Text>().enabled = false;

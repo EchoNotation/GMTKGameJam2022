@@ -33,8 +33,13 @@ public class Player: MonoBehaviour
     private int[] resourceQuantities;
     private bool rollingDice;
 
+    private const int pointsPerKill = 25;
+
     private int score;
     private int comboMultiplier;
+    private int comboDecayRemaining;
+    private int comboDecayDelay = 8;
+    private int killsThisTurn = 0;
 
     private Direction facing;
     private bool holdingGun;
@@ -66,6 +71,11 @@ public class Player: MonoBehaviour
         gridPos = new Vector2Int();
         resourceQuantities = new int[3];
         health = 3;
+        score = 0;
+        killsThisTurn = 0;
+        comboMultiplier = 0;
+        comboDecayRemaining = comboDecayDelay;
+
         rollingDice = false;
 
         state = PlayerState.IDLE;
@@ -238,7 +248,8 @@ public class Player: MonoBehaviour
                 state = PlayerState.IDLE;
                 break;
         }
-
+        
+        UpdateCombo();
         UpdateInterface();
         UpdateSprite();
         controller.GetComponent<GameController>().NextMove();
@@ -529,6 +540,7 @@ public class Player: MonoBehaviour
             {
                 //Debug.Log("Sliced.");
                 enemies[i].GetComponent<EnemyBase>().TakeDamage();
+                killsThisTurn++;
                 sound.GetComponent<SoundController>().PlaySound(Sound.AXE_HIT);
             }
         }
@@ -549,6 +561,7 @@ public class Player: MonoBehaviour
                 {
                     //Debug.Log("Sniped.");
                     enemies[i].GetComponent<EnemyBase>().TakeDamage();
+                    killsThisTurn++;
                     break;
                 }
             }
@@ -570,6 +583,7 @@ public class Player: MonoBehaviour
                 {
                     //Debug.Log("Toasted.");
                     enemies[i].GetComponent<EnemyBase>().TakeDamage();
+                    killsThisTurn++;
                     break;
                 }
             }
@@ -590,6 +604,7 @@ public class Player: MonoBehaviour
                 {
                     //Debug.Log("Diced.");
                     enemies[i].GetComponent<EnemyBase>().TakeDamage();
+                    killsThisTurn++;
                     sound.GetComponent<SoundController>().PlaySound(Sound.DASH_HIT);
                     break;
                 }
@@ -614,5 +629,38 @@ public class Player: MonoBehaviour
         }
 
         UpdateInterface();
+    }
+
+    public void UpdateCombo()
+    {
+        if(killsThisTurn > 1)
+        {
+            //Doing this ahead of time makes multikills more score profitable than individual kills.
+            comboMultiplier += killsThisTurn;
+            score += (pointsPerKill + (killsThisTurn * pointsPerKill * comboMultiplier));
+            comboDecayRemaining = comboDecayDelay;
+        }
+        else if(killsThisTurn == 1)
+        {
+            //Single kills can maintain and grow combos, but not initiate them.
+            score += (pointsPerKill + pointsPerKill * comboMultiplier);
+
+            if (comboMultiplier > 0)
+            {
+                comboMultiplier++;
+            }
+
+            comboDecayRemaining = comboDecayDelay;
+        }
+        else {
+            comboDecayRemaining--;
+
+            if(comboDecayRemaining <= 0)
+            {
+                comboMultiplier = 0;
+            }
+        }
+
+        killsThisTurn = 0;
     }
 }
