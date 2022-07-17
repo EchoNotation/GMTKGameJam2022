@@ -35,6 +35,9 @@ public class Player: MonoBehaviour
     private int score;
     private int comboMultiplier;
 
+    private Direction facing;
+    private bool holdingGun;
+
     private const int dashRange = 5;
 
     private const int stepsPerMove = 5;
@@ -156,20 +159,24 @@ public class Player: MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             UseAbility(0);
+            UpdateSprite();
             return;
         }
         else if(Input.GetKeyDown(KeyCode.Alpha2))
         {
             UseAbility(1);
+            UpdateSprite();
             return;
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3))
         {
             UseAbility(2);
+            UpdateSprite();
             return;
         }
 
         if (dir == Direction.NONE || state == PlayerState.IDLE) return;
+        facing = dir;
 
         switch (state)
         {
@@ -204,6 +211,7 @@ public class Player: MonoBehaviour
         }
 
         UpdateInterface();
+        UpdateSprite();
         controller.GetComponent<GameController>().NextMove();
     }
 
@@ -243,6 +251,10 @@ public class Player: MonoBehaviour
         }
     }
 
+    private void UpdateSprite()
+    {
+        GetComponent<PlayerAnimation>().UpdateSprite(holdingGun, facing);
+    }
     private void UpdateWorldPosition()
     {
         transform.position = map.GetCellCenterWorld(new Vector3Int(gridPos.x, gridPos.y, 0));
@@ -270,15 +282,19 @@ public class Player: MonoBehaviour
                 break;
             case Resource.MELEE:
                 state = PlayerState.AIMING_MELEE;
+                holdingGun = false;
                 break;
             case Resource.RIFLE:
                 state = PlayerState.AIMING_RIFLE;
+                holdingGun = true;
                 break;
             case Resource.DASH:
                 state = PlayerState.AIMING_DASH;
+                holdingGun = false;
                 break;
             case Resource.SHOTGUN:
                 state = PlayerState.AIMING_SHOTGUN;
+                holdingGun = true;
                 break;
             case Resource.BLANK:
                 Debug.Log("You shouldn't be here!");

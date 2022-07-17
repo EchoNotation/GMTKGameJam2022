@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1246262875481001301}
   - component: {fileID: 2035197000465004347}
   - component: {fileID: -3846641406164838322}
+  - component: {fileID: 1349389054}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.24008678, g: 1, b: 0.18396229, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 1b0afed9efc9d37449c46f4c1e6a0eb2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -116,23 +117,47 @@ MonoBehaviour:
   score: {fileID: 0}
   comboText: {fileID: 0}
   comboCounter: {fileID: 0}
-  heartFull: {fileID: 0}
-  heartEmpty: {fileID: 0}
-  blank: {fileID: 0}
-  axe: {fileID: 0}
-  move: {fileID: 0}
-  rifle: {fileID: 0}
-  shotgun: {fileID: 0}
-  dash: {fileID: 0}
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  stepText: {fileID: 0}
+  stepCounter: {fileID: 0}
+  brain: {fileID: 0}
+  blank: {fileID: 21300000, guid: b57213b76e7045f45b58a748453c167f, type: 3}
+  axe: {fileID: 21300000, guid: d6e9a97645069e44b8844cdc1f6c4354, type: 3}
+  move: {fileID: 21300000, guid: 43d6080a008b15b4e923b5889af758a3, type: 3}
+  rifle: {fileID: 21300000, guid: 4742bc61aa621514581c1dce3b375bca, type: 3}
+  shotgun: {fileID: 21300000, guid: c45c8d9e7b53b514f970fd22f70d8c35, type: 3}
+  dash: {fileID: 21300000, guid: f34c76bb0e973674598a804e2586cc2a, type: 3}
+  brainSprites:
+  - {fileID: 21300000, guid: e33d726164623ad4399a806e66577d91, type: 3}
+  - {fileID: 21300000, guid: 1f09d65d5daeeb149874da8715622b9f, type: 3}
+  - {fileID: 21300000, guid: 3c93016c9fa36f746b8bc26c712040c2, type: 3}
+  - {fileID: 21300000, guid: c6648df37efb81546ae015893b0dd0e6, type: 3}
   icons:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   quantities:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &1349389054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6604474538722302119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a915c460ed9c4e44b4adba5e5f9a205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  axeSprites:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

@@ -1206,37 +1206,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: axe
-      value: 
-      objectReference: {fileID: 21300000, guid: d6e9a97645069e44b8844cdc1f6c4354, type: 3}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: dash
-      value: 
-      objectReference: {fileID: 21300000, guid: f34c76bb0e973674598a804e2586cc2a, type: 3}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: move
-      value: 
-      objectReference: {fileID: 21300000, guid: 43d6080a008b15b4e923b5889af758a3, type: 3}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: blank
-      value: 
-      objectReference: {fileID: 21300000, guid: b57213b76e7045f45b58a748453c167f, type: 3}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
       propertyPath: brain
       value: 
       objectReference: {fileID: 532991639}
     - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: rifle
-      value: 
-      objectReference: {fileID: 21300000, guid: 4742bc61aa621514581c1dce3b375bca, type: 3}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
       propertyPath: score
       value: 
       objectReference: {fileID: 648148077}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: shotgun
-      value: 
-      objectReference: {fileID: 21300000, guid: c45c8d9e7b53b514f970fd22f70d8c35, type: 3}
     - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
       propertyPath: stepText
       value: 
@@ -1266,18 +1242,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 814598476}
     - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: hearts.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: hearts.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: hearts.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
       propertyPath: quantities.Array.data[0]
       value: 
       objectReference: {fileID: 355494351}
@@ -1289,38 +1253,6 @@ PrefabInstance:
       propertyPath: quantities.Array.data[2]
       value: 
       objectReference: {fileID: 1953811217}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: brainSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: e33d726164623ad4399a806e66577d91, type: 3}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: brainSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 1f09d65d5daeeb149874da8715622b9f, type: 3}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: brainSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 3c93016c9fa36f746b8bc26c712040c2, type: 3}
-    - target: {fileID: -3846641406164838322, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: brainSprites.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: c6648df37efb81546ae015893b0dd0e6, type: 3}
-    - target: {fileID: 771792212, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: orthographic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 771792212, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: field of view
-      value: 14.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 771792212, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: orthographic size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 771792213, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
     - target: {fileID: 6604474538722302119, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
       propertyPath: m_Name
       value: Player
