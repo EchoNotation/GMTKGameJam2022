@@ -20,8 +20,11 @@ public class EnemyBase : MonoBehaviour
 
     bool isRecovering = false;
 
-    // 4 sprites in order NESW
-    public List<Sprite> sprites = new List<Sprite>();
+    private Direction facing;
+
+    // 4 sprites in order UDLR
+    public Sprite[] moveSprites = new Sprite[4];
+    public Sprite[] recoverSprites = new Sprite[4];
     SpriteRenderer spriteRenderer;
 
     private void Start()
@@ -32,6 +35,24 @@ public class EnemyBase : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         SnapToGrid();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        switch(Random.Range(0, 4))
+        {
+            case 0:
+                facing = Direction.UP;
+                break;
+            case 1:
+                facing = Direction.DOWN;
+                break;
+            case 2:
+                facing = Direction.LEFT;
+                break;
+            case 3:
+                facing = Direction.RIGHT;
+                break;
+        }
+
+        SetSprite(facing, false);
     }
 
     void SnapToGrid()
@@ -48,10 +69,24 @@ public class EnemyBase : MonoBehaviour
             float dt = Mathf.Clamp01((Time.realtimeSinceStartup - timeStartMove) / animateMoveTime);
             transform.position = Vector3.Lerp(prevPosition, desiredMove, dt);
 
-            if(dt >= 1)
+            Vector3 dir = desiredMove - transform.position;
+            // N
+            if (dir.y > 0) facing = Direction.UP;
+            // E
+            if (dir.x > 0) facing = Direction.RIGHT;
+            // S
+            if (dir.y < 0) facing = Direction.DOWN;
+            // W
+            if (dir.x < 0) facing = Direction.LEFT;
+
+            SetSprite(facing, false);
+
+            if (dt >= 1)
             {
                 isAnimating = false;
                 Debug.DrawLine(transform.position, prevPosition, Color.cyan, 2f);
+                //Set sprite to recover mode
+                SetSprite(facing, true);
             }
         }
     }
@@ -68,13 +103,43 @@ public class EnemyBase : MonoBehaviour
 
         Vector3 dir = pos - transform.position;
         // N
-        if (dir.y > 0) spriteRenderer.sprite = sprites[0];
+        if (dir.y > 0) facing = Direction.UP;
         // E
-        if (dir.x > 0) spriteRenderer.sprite = sprites[1];
+        if (dir.x > 0) facing = Direction.RIGHT;
         // S
-        if(dir.y < 0) spriteRenderer.sprite = sprites[2];
+        if (dir.y < 0) facing = Direction.DOWN;
         // W
-        if (dir.x < 0) spriteRenderer.sprite = sprites[3];
+        if (dir.x < 0) facing = Direction.LEFT;
+    }
+
+    private void SetSprite(Direction dir, bool recovering)
+    {
+        int directionIndex = 0;
+
+        switch(dir)
+        {
+            case Direction.UP:
+                directionIndex = 0;
+                break;
+            case Direction.DOWN:
+                directionIndex = 1;
+                break;
+            case Direction.LEFT:
+                directionIndex = 2;
+                break;
+            case Direction.RIGHT:
+                directionIndex = 3;
+                break;
+        }
+
+        if(recovering)
+        {
+            spriteRenderer.sprite = recoverSprites[directionIndex];
+        }
+        else
+        {
+            spriteRenderer.sprite = moveSprites[directionIndex];
+        }
     }
 
     bool CanAttack()
@@ -110,6 +175,7 @@ public class EnemyBase : MonoBehaviour
         {
             SetMove(nextPos);
             Debug.DrawLine(transform.position, nextPos, Color.green, 3f);
+
             return true;
         }
         else
@@ -144,6 +210,8 @@ public class EnemyBase : MonoBehaviour
 
         // idle, recover
         isRecovering = false;
+        //Set sprite to attack mode
+        SetSprite(facing, false);
     }
 
     public void TakeDamage()
