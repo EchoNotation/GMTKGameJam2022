@@ -93,6 +93,8 @@ public class EnemyBase : MonoBehaviour
 
         var path = mapManager.GetPath(transform.position, player.transform.position);
 
+        if (path == null) return false;
+
         if (path.Count <= 1) return false;
 
         Vector3Int nextMove = path[1];
