@@ -94,7 +94,7 @@ public class Pathfinder
     /// /// <param name="cost">function to estimate cost between T1 and the end</param>
     /// <param name="abort">number of tiles to explore before aborting search</param>
     /// <returns></returns>
-    public PathfinderResult<T> GetPath<T>(T start, Func<T, bool> evaluate, Func<T, List<T>> getNeighbors, Func<T, T, float> cost, Func<T, float> hEstimator, int abort = 10000)
+    public PathfinderResult<T> GetPath<T>(T start, Func<T, bool> evaluate, Func<T, List<T>> getNeighbors, Func<T, T, float> cost, Func<T, float> hEstimator, int abort = 700)
     {
         var map = new Dictionary<T, Node<T>>();
 
