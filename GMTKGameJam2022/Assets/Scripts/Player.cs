@@ -506,12 +506,14 @@ public class Player: MonoBehaviour
                 oddStep = true;
                 sound.GetComponent<SoundController>().PlaySound(Sound.STEP2);
             }
+
+            isAnimating = true;
+            desiredMove = map.GetCellCenterWorld(new Vector3Int(spaceToMoveTo.x, spaceToMoveTo.y, 0));
+            prevPosition = transform.position;
+            timeStartMove = Time.realtimeSinceStartup;
         }
 
-        isAnimating = true;
-        desiredMove = map.GetCellCenterWorld(new Vector3Int(spaceToMoveTo.x, spaceToMoveTo.y, 0));
-        prevPosition = transform.position;
-        timeStartMove = Time.realtimeSinceStartup;
+        
     }
 
     private void AttemptMelee(Vector2Int spaceToAttack)
