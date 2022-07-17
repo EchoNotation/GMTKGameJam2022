@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animateMoveTime: 0.2
+  bloodSplatterPrefab: {fileID: 8741949623402641194, guid: dfe98e99e6128c54eac73f369f8d2453, type: 3}
   moveSprites:
   - {fileID: 21300000, guid: 9481a68c2d74bdc459596d57d223417b, type: 3}
   - {fileID: 21300000, guid: 80382ae31bc497749834a78c6cde18d2, type: 3}

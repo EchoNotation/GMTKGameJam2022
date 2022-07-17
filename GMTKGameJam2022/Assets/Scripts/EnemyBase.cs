@@ -8,6 +8,8 @@ public class EnemyBase : MonoBehaviour
     public float animateMoveTime = 0.5f;
     GameObject player;
 
+    public GameObject bloodSplatterPrefab;
+
     Vector3 desiredMove;
     float timeStartMove;
     Vector3 prevPosition;
@@ -216,6 +218,9 @@ public class EnemyBase : MonoBehaviour
 
     public void TakeDamage()
     {
+        GameObject blood = Instantiate(bloodSplatterPrefab, transform.position, Quaternion.identity);
+        blood.transform.forward = transform.position - player.transform.position;
+
         isAlive = false;
         mapManager.Unreserve(desiredMove);
         Destroy(gameObject);

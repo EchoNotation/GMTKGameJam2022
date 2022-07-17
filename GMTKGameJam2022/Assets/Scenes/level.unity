@@ -200,6 +200,7 @@ MonoBehaviour:
   spawnRate: 15
   initialSpawnCount: 1
   spawnCountIncrease: 1
+  startingEnemyCount: 1
 --- !u!1 &248568761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,7 +1793,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1598650146
 Transform:
@@ -29743,7 +29744,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!156049354 &1980044643
 Grid:
