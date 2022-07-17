@@ -14,11 +14,12 @@ public static class Sound
     public const int DASH = 7;
     public const int DASH_HIT = 8;
     public const int CLICK = 9;
+    public const int DICE_REFRESH = 10;
 }
 
 public class SoundController : MonoBehaviour
 {
-    public AudioSource[] sources = new AudioSource[10];
+    public AudioSource[] sources = new AudioSource[11];
 
     // Start is called before the first frame update
     void Start()

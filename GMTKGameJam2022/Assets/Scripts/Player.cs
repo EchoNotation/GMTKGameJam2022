@@ -119,6 +119,7 @@ public class Player: MonoBehaviour
             if (temp) return;
 
             rollingDice = false;
+            sound.GetComponent<SoundController>().PlaySound(Sound.DICE_REFRESH);
 
             for(int i = 0; i < dice.Length; i++)
             {
