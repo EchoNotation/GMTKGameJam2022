@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public enum Direction
 {
@@ -29,6 +30,7 @@ public class Player: MonoBehaviour
     private Die[] dice;
     public Vector2Int gridPos;
     private int health;
+    private bool dead;
     public PlayerState state;
     private int[] resourceQuantities;
     private bool rollingDice;
@@ -57,6 +59,8 @@ public class Player: MonoBehaviour
     private GameObject controller, sound;
     public GameObject axeIndicator, rifleIndicator, shotgunIndicator, dashIndicator;
 
+    public GameObject gameOverPanel, gameOverMessage;
+
     private Tilemap map;
 
     private PlayerUIManager uiManager;
@@ -69,6 +73,9 @@ public class Player: MonoBehaviour
         uiManager = GetComponent<PlayerUIManager>();
         sound = GameObject.FindGameObjectWithTag("SoundController");
 
+        gameOverPanel.GetComponent<Image>().enabled = false;
+        gameOverMessage.GetComponent<Text>().enabled = false;
+
         dice = new Die[3];
         gridPos = new Vector2Int();
         resourceQuantities = new int[3];
@@ -79,6 +86,7 @@ public class Player: MonoBehaviour
         comboDecayRemaining = comboDecayDelay;
 
         rollingDice = false;
+        dead = false;
 
         state = PlayerState.IDLE;
 
@@ -132,6 +140,7 @@ public class Player: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(dead) return;
         if(state == PlayerState.COOLDOWN) return;
 
         if (isAnimating)
@@ -263,6 +272,8 @@ public class Player: MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(dead) return;
+
         if (state == PlayerState.COOLDOWN)
         {
             cooldownRemaining--;
@@ -635,7 +646,10 @@ public class Player: MonoBehaviour
         if (health <= 0)
         {
             health = 0;
-            Debug.Log("Dead");
+            dead = true;
+
+            gameOverPanel.GetComponent<Image>().enabled = true;
+            gameOverMessage.GetComponent<Text>().enabled = true;
         }
 
         UpdateInterface();

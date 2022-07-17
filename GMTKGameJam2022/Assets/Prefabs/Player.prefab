@@ -447,6 +447,8 @@ MonoBehaviour:
   rifleIndicator: {fileID: 4750522099601199251}
   shotgunIndicator: {fileID: 8058099128413910328}
   dashIndicator: {fileID: 482916417417038625}
+  gameOverPanel: {fileID: 0}
+  gameOverMessage: {fileID: 0}
 --- !u!114 &-3846641406164838322
 MonoBehaviour:
   m_ObjectHideFlags: 0
