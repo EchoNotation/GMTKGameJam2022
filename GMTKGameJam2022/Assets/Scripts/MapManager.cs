@@ -182,7 +182,7 @@ public class MapManager : MonoBehaviour
 
     public bool GetWalkable(Vector2Int tilePosition)
     {
-        return GetWalkable(new Vector3Int(tilePosition.x, tilePosition.y));
+        return GetWalkable(new Vector3Int(tilePosition.x, tilePosition.y, 0));
     }
 
     public bool GetIsWall(Vector2Int tilePosition)
@@ -193,11 +193,5 @@ public class MapManager : MonoBehaviour
             return tileProperties.isWall;
         }
         return true;
-    }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(20, 20, 20, 20), $"{reservedSpaces.Count} reserved");
-        
     }
 }
