@@ -1402,10 +1402,6 @@ PrefabInstance:
       propertyPath: quantities.Array.data[2]
       value: 
       objectReference: {fileID: 1953811217}
-    - target: {fileID: 1825858269, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
-      propertyPath: orthographic size
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 6604474538722302119, guid: 581910c7480c1c145bb55cf679d292fb, type: 3}
       propertyPath: m_Name
       value: Player
