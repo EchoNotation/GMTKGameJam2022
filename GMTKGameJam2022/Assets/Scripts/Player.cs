@@ -55,6 +55,8 @@ public class Player: MonoBehaviour
     private int cooldownRemaining;
 
     private GameObject controller, sound;
+    public GameObject axeIndicator, rifleIndicator, shotgunIndicator, dashIndicator;
+
     private Tilemap map;
 
     private PlayerUIManager uiManager;
@@ -233,18 +235,22 @@ public class Player: MonoBehaviour
                 break;
             case PlayerState.AIMING_MELEE:
                 AttemptMelee(FindNeighboringPosition(dir));
+                axeIndicator.GetComponent<SpriteRenderer>().enabled = false;
                 state = PlayerState.IDLE;
                 break;
             case PlayerState.AIMING_RIFLE:
                 AttemptRifle(FindRifleAffectedPositions(dir));
+                rifleIndicator.GetComponent<SpriteRenderer>().enabled = false;
                 state = PlayerState.RELOADING;
                 break;
             case PlayerState.AIMING_DASH:
                 AttemptDash(FindDashAffectedPositions(dir));
+                dashIndicator.GetComponent<SpriteRenderer>().enabled = false;
                 state = PlayerState.IDLE;
                 break;
             case PlayerState.AIMING_SHOTGUN:
                 AttemptShotgun(FindShotgunAffectedPositions(dir));
+                shotgunIndicator.GetComponent<SpriteRenderer>().enabled = false;
                 state = PlayerState.IDLE;
                 break;
         }
@@ -334,18 +340,22 @@ public class Player: MonoBehaviour
                 break;
             case Resource.MELEE:
                 state = PlayerState.AIMING_MELEE;
+                axeIndicator.GetComponent<SpriteRenderer>().enabled = true;
                 holdingGun = false;
                 break;
             case Resource.RIFLE:
                 state = PlayerState.AIMING_RIFLE;
+                rifleIndicator.GetComponent<SpriteRenderer>().enabled = true;
                 holdingGun = true;
                 break;
             case Resource.DASH:
                 state = PlayerState.AIMING_DASH;
+                dashIndicator.GetComponent<SpriteRenderer>().enabled = true;
                 holdingGun = false;
                 break;
             case Resource.SHOTGUN:
                 state = PlayerState.AIMING_SHOTGUN;
+                shotgunIndicator.GetComponent<SpriteRenderer>().enabled = true;
                 holdingGun = true;
                 break;
             case Resource.BLANK:
