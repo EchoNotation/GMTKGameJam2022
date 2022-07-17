@@ -558,10 +558,14 @@ public class Player: MonoBehaviour
     public void TakeDamage()
     {
         health--;
-        if(health <= 0)
+        sound.GetComponent<SoundController>().PlaySound(Sound.ZOMBIE_BITE);
+
+        if (health <= 0)
         {
             health = 0;
             Debug.Log("Dead");
         }
+
+        UpdateInterface();
     }
 }
