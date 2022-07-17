@@ -20,6 +20,10 @@ public class EnemyBase : MonoBehaviour
 
     bool isRecovering = false;
 
+    // 4 sprites in order NESW
+    public List<Sprite> sprites = new List<Sprite>();
+    SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         prevPosition = transform.position;
@@ -27,6 +31,7 @@ public class EnemyBase : MonoBehaviour
         mapManager = GameObject.Find("Controller").GetComponent<MapManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         SnapToGrid();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void SnapToGrid()
@@ -60,6 +65,16 @@ public class EnemyBase : MonoBehaviour
         mapManager.Unreserve(prevPosition);
         isAnimating = true;
         isRecovering = true;
+
+        Vector3 dir = pos - transform.position;
+        // N
+        if (dir.y > 0) spriteRenderer.sprite = sprites[0];
+        // E
+        if (dir.x > 0) spriteRenderer.sprite = sprites[1];
+        // S
+        if(dir.y < 0) spriteRenderer.sprite = sprites[2];
+        // W
+        if (dir.x < 0) spriteRenderer.sprite = sprites[3];
     }
 
     bool CanAttack()
