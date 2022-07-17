@@ -31,7 +31,7 @@ public class PlayerUIManager : MonoBehaviour
 
     public void SetCombo(int comboMultiplier)
     {
-        if(comboMultiplier <= 1)
+        if(comboMultiplier == 0)
         {
             comboText.GetComponent<Text>().enabled = false;
             comboCounter.GetComponent<Text>().enabled = false;
