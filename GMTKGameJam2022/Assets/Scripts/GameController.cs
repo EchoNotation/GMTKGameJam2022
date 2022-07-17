@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
 
     MapManager mapManager;
 
+    public int enemyCap = 70;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,12 @@ public class GameController : MonoBehaviour
         {
             var enemyController = enemy.GetComponent<EnemyBase>();
             enemyController.TakeTurn();
+        }
+
+        // abort if there are too many dang zombies
+        if(enemies.Length > enemyCap)
+        {
+            return;
         }
 
         if(turnCount % spawnRate == 0)
