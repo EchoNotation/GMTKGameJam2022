@@ -28,7 +28,7 @@ public class Player: MonoBehaviour
 {
     private Die[] dice;
     public Vector2Int gridPos;
-    public int health;
+    private int health;
     public PlayerState state;
     private int[] resourceQuantities;
     private bool rollingDice;
@@ -43,6 +43,8 @@ public class Player: MonoBehaviour
 
     private const int stepsPerMove = 5;
     private int stepsRemaining;
+
+    private bool isAnimating = false;
 
     private int cooldownTime = 30;
     private int cooldownRemaining;
@@ -110,10 +112,28 @@ public class Player: MonoBehaviour
         UpdateInterface();
     }
 
+    private float animateMoveTime = 0.2f;
+    private Vector3 desiredMove;
+    private float timeStartMove;
+    private Vector3 prevPosition;
+
     // Update is called once per frame
     void Update()
     {
         if(state == PlayerState.COOLDOWN) return;
+
+        if (isAnimating)
+        {
+            float dt = Mathf.Clamp01((Time.realtimeSinceStartup - timeStartMove) / animateMoveTime);
+            transform.position = Vector3.Lerp(prevPosition, desiredMove, dt);
+
+            if (dt >= 1)
+            {
+                isAnimating = false;
+            }
+
+            return;
+        }
 
         bool temp = false;
 
@@ -139,7 +159,6 @@ public class Player: MonoBehaviour
         int total = resourceQuantities[0] + resourceQuantities[1] + resourceQuantities[2];
         if(state == PlayerState.IDLE && total == 0)
         {
-            Debug.Log("Starting cooldown");
             state = PlayerState.COOLDOWN;
             cooldownRemaining = cooldownTime;
             return;
@@ -475,7 +494,7 @@ public class Player: MonoBehaviour
             gridPos.x = spaceToMoveTo.x;
             gridPos.y = spaceToMoveTo.y;
 
-            UpdateWorldPosition();
+            //UpdateWorldPosition();
 
             if(oddStep)
             {
@@ -489,6 +508,10 @@ public class Player: MonoBehaviour
             }
         }
 
+        isAnimating = true;
+        desiredMove = map.GetCellCenterWorld(new Vector3Int(spaceToMoveTo.x, spaceToMoveTo.y, 0));
+        prevPosition = transform.position;
+        timeStartMove = Time.realtimeSinceStartup;
     }
 
     private void AttemptMelee(Vector2Int spaceToAttack)
