@@ -201,6 +201,7 @@ MonoBehaviour:
   initialSpawnCount: 1
   spawnCountIncrease: 1
   startingEnemyCount: 1
+  enemyCap: 70
 --- !u!1 &248568761
 GameObject:
   m_ObjectHideFlags: 0
