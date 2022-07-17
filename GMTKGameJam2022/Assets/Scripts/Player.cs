@@ -189,7 +189,7 @@ public class Player: MonoBehaviour
                 state = PlayerState.IDLE;
                 break;
             case PlayerState.AIMING_RIFLE:
-                AttemptRifle(dir);
+                AttemptRifle(FindRifleAffectedPositions(dir));
                 state = PlayerState.RELOADING;
                 break;
             case PlayerState.AIMING_DASH:
@@ -306,6 +306,43 @@ public class Player: MonoBehaviour
         }
 
         return square;
+    }
+
+    private Vector2Int[] FindRifleAffectedPositions(Direction dir)
+    {
+        List<Vector2Int> squares = new List<Vector2Int>();
+        Vector2Int next = new Vector2Int(gridPos.x, gridPos.y);
+
+        int xOffset = 0;
+        int yOffset = 0;
+
+        switch(dir)
+        {
+            case Direction.UP:
+                yOffset = 1;
+                break;
+            case Direction.LEFT:
+                xOffset = -1;
+                break;
+            case Direction.RIGHT:
+                xOffset = 1;
+                break;
+            case Direction.DOWN:
+                yOffset = -1;
+                break;
+        }
+
+        next.x += xOffset;
+        next.y += yOffset;
+
+        while(!controller.GetComponent<MapManager>().GetIsWall(next)) {
+            squares.Add(next);
+
+            next.x += xOffset;
+            next.y += yOffset;
+        }
+
+        return squares.ToArray();
     }
 
     private Vector2Int[] FindDashAffectedPositions(Direction dir)
@@ -433,35 +470,24 @@ public class Player: MonoBehaviour
         }
     }
 
-    private void AttemptRifle(Direction dir)
+    private void AttemptRifle(Vector2Int[] affectedSpaces)
     {
         sound.GetComponent<SoundController>().PlaySound(Sound.RIFLE);
-        Vector2 raycastDir = Vector2.up;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        switch(dir)
+        for(int i = 0; i < enemies.Length; i++)
         {
-            case Direction.UP:
-                raycastDir = Vector2.up;
-                break;
-            case Direction.DOWN:
-                raycastDir = Vector2.down;
-                break;
-            case Direction.LEFT:
-                raycastDir = Vector2.left;
-                break;
-            case Direction.RIGHT:
-                raycastDir = Vector2.right;
-                break;
-            case Direction.NONE:
-                Debug.Log("You shouldn't be here!");
-                return;
-        }
-
-        RaycastHit2D hit = Physics2D.Raycast(map.CellToWorld(new Vector3Int(gridPos.x, gridPos.y, 0)), raycastDir);
-        if(hit.collider.CompareTag("Enemy"))
-        {
-            //Debug.Log("Sniped.");
-            hit.collider.gameObject.GetComponent<EnemyBase>().TakeDamage();
+            Vector3Int tilespace = map.WorldToCell(enemies[i].GetComponent<EnemyBase>().transform.position);
+            Vector2Int enemyGridPos = new Vector2Int(tilespace.x, tilespace.y);
+            for(int j = 0; j < affectedSpaces.Length; j++)
+            {
+                if(enemyGridPos == affectedSpaces[j])
+                {
+                    //Debug.Log("Sniped.");
+                    enemies[i].GetComponent<EnemyBase>().TakeDamage();
+                    break;
+                }
+            }
         }
     }
 

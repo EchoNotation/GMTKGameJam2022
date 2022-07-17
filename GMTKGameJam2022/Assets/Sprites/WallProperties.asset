@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: WallProperties
   m_EditorClassIdentifier: 
   isWalkable: 0
+  isWall: 1
+  isSpawner: 0

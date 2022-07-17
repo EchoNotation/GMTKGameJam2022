@@ -185,6 +185,16 @@ public class MapManager : MonoBehaviour
         return GetWalkable(new Vector3Int(tilePosition.x, tilePosition.y));
     }
 
+    public bool GetIsWall(Vector2Int tilePosition)
+    {
+        var tileProperties = GetTileData(new Vector3Int(tilePosition.x, tilePosition.y, 0));
+        if(tileProperties)
+        {
+            return tileProperties.isWall;
+        }
+        return true;
+    }
+
     private void OnGUI()
     {
         GUI.Label(new Rect(20, 20, 20, 20), $"{reservedSpaces.Count} reserved");
