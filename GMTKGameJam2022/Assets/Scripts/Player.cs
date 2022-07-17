@@ -61,6 +61,8 @@ public class Player: MonoBehaviour
 
     public GameObject gameOverPanel, gameOverMessage;
 
+    private Vector2Int[] startingPositions;
+
     private Tilemap map;
 
     private PlayerUIManager uiManager;
@@ -127,7 +129,15 @@ public class Player: MonoBehaviour
             }
         }
 
-        UpdateGridPosition();
+        startingPositions = new Vector2Int[5];
+        startingPositions[0] = new Vector2Int(9, 9); //Inside bottom left house
+        startingPositions[1] = new Vector2Int(19, 19); //Central sidewalk
+        startingPositions[2] = new Vector2Int(30, 8); //Southern garden
+        startingPositions[3] = new Vector2Int(32, 25); //Inside top right house
+        startingPositions[4] = new Vector2Int(5, 31); //Top left corner
+
+        gridPos = startingPositions[Random.Range(0, startingPositions.Length)];
+
         UpdateWorldPosition();
         UpdateInterface();
     }
@@ -660,6 +670,7 @@ public class Player: MonoBehaviour
     private void AttemptDash(Vector2Int[] affectedSpaces)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        sound.GetComponent<SoundController>().PlaySound(Sound.DASH);
 
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -677,8 +688,6 @@ public class Player: MonoBehaviour
                 }
             }
         }
-
-        sound.GetComponent<SoundController>().PlaySound(Sound.DASH);
 
         gridPos = affectedSpaces[dashRange - 1];
         UpdateWorldPosition();
