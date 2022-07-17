@@ -152,12 +152,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: abd3cede54b0d2b4eb452a463e6a2894, type: 3}
+  - {fileID: 21300000, guid: 79d4341256dccc042801f8b0108b8068, type: 3}
+  - {fileID: 21300000, guid: 86647c5c2f1009d4f999060e8026e3d1, type: 3}
+  - {fileID: 21300000, guid: d98d56e7fc9aedc48a6b757edff031da, type: 3}
   axeSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 1b0afed9efc9d37449c46f4c1e6a0eb2, type: 3}
+  - {fileID: 21300000, guid: b87981d422935fb4981659ba52b2e379, type: 3}
+  - {fileID: 21300000, guid: bb6a077f30389214f8df7a0d69ebb14b, type: 3}
+  - {fileID: 21300000, guid: dca47f1ed87de234fa24a8c15f188403, type: 3}
