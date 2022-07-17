@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Diagnostics;
 using Priority_Queue;
-using Debug = UnityEngine.Debug;
 
 public class Pathfinder
 {
@@ -14,15 +11,11 @@ public class Pathfinder
         public List<T> path = null;
         public float cost = Mathf.Infinity;
         public List<T> considered = null;
+        public T closest = default;
 
         PathfinderResult() { }
 
-        public PathfinderResult(List<T> considered)
-        {
-            this.considered = considered;
-        }
-
-        public static PathfinderResult<T> CreatePath(Node<T> node)
+        static List<T> BackTrack(Node<T> node)
         {
             var path = new List<T>();
 
@@ -33,10 +26,31 @@ public class Pathfinder
                 current = current.parent;
             }
 
-
             path.Add(current.value);
 
             path.Reverse();
+
+            return path;
+        }
+
+        public static PathfinderResult<T> CreateClosePath(Node<T> node, List<T> considered = null)
+        {
+            List<T> path = BackTrack(node);
+
+            var res = new PathfinderResult<T>()
+            {
+                foundPath = false,
+                path = path,
+                cost = node.g,
+                closest = node.value
+            };
+
+            return res;
+        }
+
+        public static PathfinderResult<T> CreatePath(Node<T> node)
+        {
+            List<T> path = BackTrack(node);
 
             var res = new PathfinderResult<T>()
             {
@@ -82,8 +96,6 @@ public class Pathfinder
     /// <returns></returns>
     public PathfinderResult<T> GetPath<T>(T start, Func<T, bool> evaluate, Func<T, List<T>> getNeighbors, Func<T, T, float> cost, Func<T, float> hEstimator, int abort = 10000)
     {
-        var sw = new Stopwatch();
-
         var map = new Dictionary<T, Node<T>>();
 
         var open = new SimplePriorityQueue<Node<T>, float>();
@@ -99,6 +111,8 @@ public class Pathfinder
         bool success = false;
         Node<T> end = null;
 
+        Node<T> closest = startNode;
+
         while (open.Count > 0 && closed.Count < abort)
         {
             Node<T> current = open.Dequeue();
@@ -111,6 +125,11 @@ public class Pathfinder
                 success = true;
                 end = current;
                 break;
+            }
+
+            if(current.h < closest.h)
+            {
+                closest = current;
             }
 
             foreach (var neighbor in getNeighbors(current.value))
@@ -158,9 +177,6 @@ public class Pathfinder
             }
         }
 
-        sw.Stop();
-        // Debug.Log("completed task");
-
         if (success)
         {
             return PathfinderResult<T>.CreatePath(end);
@@ -172,7 +188,7 @@ public class Pathfinder
             {
                 debugNodes.Add(item);
             }
-            return new PathfinderResult<T>(debugNodes);
+            return PathfinderResult<T>.CreateClosePath(closest);
         }
     }
 
