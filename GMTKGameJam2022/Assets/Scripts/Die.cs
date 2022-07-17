@@ -18,10 +18,13 @@ public class Die
     private int[] quantities = new int[6];
     private Roll current;
 
+    private GameObject sound;
+
     private bool fastRolling = false;
     private bool rolling = false;
     private int ticksLeft;
     private int ticksToNextChange;
+    private int previousFace;
 
     public Resource GetResource()
     {
@@ -47,9 +50,10 @@ public class Die
             return;
         }
 
-        //Takes 1 to 3 seconds to roll
-        ticksLeft = Random.Range(60, 181);
+        //Takes 1 to 2 seconds to roll
+        ticksLeft = Random.Range(60, 121);
         rolling = true;
+        previousFace = Random.Range(0, 6);
         ticksToNextChange = 0;
     }
 
@@ -66,28 +70,26 @@ public class Die
         if(ticksToNextChange <= 0)
         {
             //Determine what the new face is, and reset ticksToNextChange
-            int chosenFace = Random.Range(0, 6);
+            int chosenFace = (previousFace + 1) % 6;
+            previousFace = chosenFace;
             current = new Roll(type, quantities[chosenFace]);
+            sound.GetComponent<SoundController>().PlaySound(Sound.CLICK);
 
-            if(ticksLeft > 150)
+            if(ticksLeft > 90)
             {
                 ticksToNextChange = 10;
             }
-            else if(ticksLeft > 120)
+            else if(ticksLeft > 60)
             {
                 ticksToNextChange = 20;
             }
-            else if(ticksLeft > 90)
+            else if(ticksLeft > 30)
             {
                 ticksToNextChange = 30;
             }
-            else if(ticksLeft > 60)
+            else
             {
-                ticksToNextChange = 40;
-            }
-            else if(ticksLeft > 30)
-            {
-                ticksToNextChange = 50;
+                ticksToNextChange = 80;
             }
         }
         else
@@ -100,6 +102,7 @@ public class Die
 
     public void Initialize(Resource newResource, int[] newQuantities)
     {
+        sound = GameObject.FindGameObjectWithTag("SoundController");
         type = newResource;
 
         for (int i = 0; i < quantities.Length; i++)

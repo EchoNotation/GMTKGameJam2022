@@ -40,7 +40,7 @@ public class Player: MonoBehaviour
     private const int stepsPerMove = 5;
     private int stepsRemaining;
 
-    private GameObject controller;
+    private GameObject controller, sound;
     private Tilemap map;
 
     private PlayerUIManager uiManager;
@@ -51,6 +51,7 @@ public class Player: MonoBehaviour
         controller = GameObject.Find("Controller");
         map = controller.GetComponent<MapManager>().map;
         uiManager = GetComponent<PlayerUIManager>();
+        sound = GameObject.FindGameObjectWithTag("SoundController");
 
         dice = new Die[3];
         gridPos = new Vector2Int();
@@ -175,6 +176,7 @@ public class Player: MonoBehaviour
                 Debug.Log("You really shouldn't be here.");
                 break;
             case PlayerState.RELOADING:
+                sound.GetComponent<SoundController>().PlaySound(Sound.RIFLE_RELOAD);
                 state = PlayerState.IDLE;
                 break;
             case PlayerState.MOVING:
@@ -385,6 +387,8 @@ public class Player: MonoBehaviour
         return squares.ToArray();
     }
 
+    bool oddStep = true;
+
     private void AttemptMovement(Vector2Int spaceToMoveTo)
     {
         //Also need to poll the list of entities to see if there is something in the new tile...
@@ -396,6 +400,17 @@ public class Player: MonoBehaviour
             gridPos.y = spaceToMoveTo.y;
 
             UpdateWorldPosition();
+
+            if(oddStep)
+            {
+                oddStep = false;
+                sound.GetComponent<SoundController>().PlaySound(Sound.STEP1);
+            }
+            else
+            {
+                oddStep = true;
+                sound.GetComponent<SoundController>().PlaySound(Sound.STEP2);
+            }
         }
 
     }
@@ -403,8 +418,9 @@ public class Player: MonoBehaviour
     private void AttemptMelee(Vector2Int spaceToAttack)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        sound.GetComponent<SoundController>().PlaySound(Sound.AXE_SWING);
 
-        for(int i = 0; i < enemies.Length; i++)
+        for (int i = 0; i < enemies.Length; i++)
         {
             Vector3Int tilespace = map.WorldToCell(enemies[i].GetComponent<EnemyBase>().transform.position);
             Vector2Int enemyGridPos = new Vector2Int(tilespace.x, tilespace.y);
@@ -412,12 +428,14 @@ public class Player: MonoBehaviour
             {
                 //Debug.Log("Sliced.");
                 enemies[i].GetComponent<EnemyBase>().TakeDamage();
+                sound.GetComponent<SoundController>().PlaySound(Sound.AXE_HIT);
             }
         }
     }
 
     private void AttemptRifle(Direction dir)
     {
+        sound.GetComponent<SoundController>().PlaySound(Sound.RIFLE);
         Vector2 raycastDir = Vector2.up;
 
         switch(dir)
@@ -449,6 +467,7 @@ public class Player: MonoBehaviour
 
     private void AttemptShotgun(Vector2Int[] affectedSpaces)
     {
+        sound.GetComponent<SoundController>().PlaySound(Sound.SHOTGUN);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         for (int i = 0; i < enemies.Length; i++)
@@ -481,10 +500,13 @@ public class Player: MonoBehaviour
                 {
                     //Debug.Log("Diced.");
                     enemies[i].GetComponent<EnemyBase>().TakeDamage();
+                    sound.GetComponent<SoundController>().PlaySound(Sound.DASH_HIT);
                     break;
                 }
             }
         }
+
+        sound.GetComponent<SoundController>().PlaySound(Sound.DASH);
 
         gridPos = affectedSpaces[dashRange - 1];
         UpdateWorldPosition();
