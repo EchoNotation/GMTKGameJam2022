@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     int spawnCount = 0;
     int enemiesLeftToSpawn = 0;
 
+    public int startingEnemyCount = 1;
+
     MapManager mapManager;
 
     // Start is called before the first frame update
@@ -17,6 +19,8 @@ public class GameController : MonoBehaviour
     {
         spawnCount = initialSpawnCount;
         mapManager = FindObjectOfType<MapManager>();
+
+        enemiesLeftToSpawn = startingEnemyCount;
     }
 
     public void NextMove()
