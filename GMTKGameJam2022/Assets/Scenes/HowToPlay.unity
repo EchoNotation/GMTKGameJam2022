@@ -516,24 +516,25 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Roll your dice at the start of your turn with SPACE.
+  m_Text: 'At the start of each turn, your selected dice will be rolled automatically.
 
 
-    In order to
-    use a die''s ability press 1, 2, or 3 depending on which slot it is in.  Move
-    and aim abilities using WASD.
+    In
+    order to use a die''s ability press 1, 2, or 3 depending on which slot it is
+    in.  Move and aim abilities using WASD. You can press escape to cancel out of
+    aiming a weapon.
 
 
-    You must finish using an ability before you
-    can select another one, and your turn ends when you use all of the abilities
-    you rolled.
+    You must finish using an ability before you can select
+    another one, and your turn ends when you use all of the abilities you rolled.
 
 
-    Get multikills and maintain combos for high scores.
+    Get
+    multikills and maintain combos for high scores.
 
 
-    Try
-    and survive for as long as you can. Good luck!'
+    Try and survive for as
+    long as you can. Good luck!'
 --- !u!222 &1743720623
 CanvasRenderer:
   m_ObjectHideFlags: 0

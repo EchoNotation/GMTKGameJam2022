@@ -1192,10 +1192,10 @@ RectTransform:
   m_Father: {fileID: 808843798}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.35216668, y: 0.537}
-  m_AnchorMax: {x: 0.6495209, y: 0.57962966}
-  m_AnchoredPosition: {x: -1.5, y: 0.33399963}
-  m_SizeDelta: {x: 2.758789, y: 0.31000137}
+  m_AnchorMin: {x: 0.26513606, y: 0.537}
+  m_AnchorMax: {x: 0.73300004, y: 0.58156013}
+  m_AnchoredPosition: {x: 0.32739258, y: -0.6549797}
+  m_SizeDelta: {x: -0.6327057, y: -0.69000006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1379961722
 MonoBehaviour:
@@ -1230,7 +1230,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Choose your 3 dice!
+  m_Text: Click to select the 3 dice you want!
 --- !u!222 &1379961723
 CanvasRenderer:
   m_ObjectHideFlags: 0
