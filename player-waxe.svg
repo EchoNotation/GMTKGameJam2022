@@ -16,7 +16,10 @@
    version="1.1"
    id="svg2811"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="player-waxe.svg">
+   sodipodi:docname="player-waxe.svg"
+   inkscape:export-filename="D:\Documents\datalad\GMTKGameJam2022\player-waxeS.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
   <defs
      id="defs2805">
     <linearGradient
@@ -49,8 +52,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="94.699531"
-     inkscape:cy="108.97988"
+     inkscape:cx="106.48525"
+     inkscape:cy="120.76559"
      inkscape:document-units="mm"
      inkscape:current-layer="layer16"
      showgrid="false"
