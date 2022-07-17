@@ -80,7 +80,10 @@ public class EnemyBase : MonoBehaviour
     bool CanAttack()
     {
         // check if in range
-        var range = mapManager.ManhattanDistance(transform.position, player.transform.position);
+        Vector2Int playerGrid = player.GetComponent<Player>().gridPos;
+        Vector3Int playerGrid3 = new Vector3Int(playerGrid.x, playerGrid.y, 0);
+        Vector3Int enemyGrid = mapManager.map.WorldToCell(transform.position);
+        var range = mapManager.ManhattanDistance(playerGrid3, enemyGrid);
         return range <= 1 && !isRecovering;
     }
 
