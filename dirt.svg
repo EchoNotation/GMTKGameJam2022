@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="250"
+   height="250"
+   viewBox="0 0 66.145832 66.145835"
+   version="1.1"
+   id="svg3435"
+   inkscape:export-filename="D:\Documents\datalad\GMTKGameJam2022\dirt.png"
+   inkscape:export-xdpi="98.303993"
+   inkscape:export-ydpi="98.303993"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="dirt.svg">
+  <defs
+     id="defs3429" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2"
+     inkscape:cx="105.99679"
+     inkscape:cy="151.33033"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3432">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-230.85415)">
+    <rect
+       style="opacity:1;fill:#784421;fill-opacity:1;stroke:#333333;stroke-width:0.21787223;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect6454"
+       width="67.979515"
+       height="66.964119"
+       x="-0.25719696"
+       y="229.98221" />
+    <ellipse
+       style="opacity:1;fill:#a67759;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path6554"
+       cx="220.89859"
+       cy="174.14738"
+       rx="1.3563927"
+       ry="2.2450638"
+       transform="rotate(48.648372)" />
+    <ellipse
+       style="opacity:1;fill:#a67759;fill-opacity:1;stroke:none;stroke-width:0.24749506;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path6554-6"
+       cx="-109.72072"
+       cy="239.11365"
+       rx="1.9644309"
+       ry="1.3563929"
+       transform="rotate(-31.608666)" />
+    <ellipse
+       style="opacity:1;fill:#a67759;fill-opacity:1;stroke:none;stroke-width:0.21416095;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path6554-6-3"
+       cx="257.35416"
+       cy="137.60757"
+       rx="0.88867122"
+       ry="2.245064"
+       transform="rotate(54.474111)" />
+    <ellipse
+       style="opacity:1;fill:#a67759;fill-opacity:1;stroke:none;stroke-width:0.24749506;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path6554-6-6"
+       cx="-79.423843"
+       cy="248.85463"
+       rx="1.9644309"
+       ry="1.3563929"
+       transform="rotate(-28.26226)"
+       inkscape:transform-center-x="0.092520413"
+       inkscape:transform-center-y="0.23506205" />
+    <ellipse
+       style="opacity:1;fill:#a67759;fill-opacity:1;stroke:none;stroke-width:0.24749506;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path6554-6-6-3"
+       cx="-163.79753"
+       cy="228.83707"
+       rx="1.9644309"
+       ry="1.3563927"
+       transform="rotate(-46.677802)"
+       inkscape:transform-center-x="0.35517194"
+       inkscape:transform-center-y="-0.047392847" />
+    <ellipse
+       style="opacity:1;fill:#a67759;fill-opacity:1;stroke:none;stroke-width:0.24749506;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path6554-6-6-3-8"
+       cx="-145.80322"
+       cy="193.85461"
+       rx="1.9644309"
+       ry="1.3563926"
+       transform="rotate(-40.698573)"
+       inkscape:transform-center-x="0.35409182"
+       inkscape:transform-center-y="0.093391998" />
+    <ellipse
+       style="opacity:1;fill:#a67759;fill-opacity:1;stroke:none;stroke-width:0.19915876;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path6554-6-6-3-7"
+       cx="-217.38612"
+       cy="176.6657"
+       rx="2.0565898"
+       ry="0.83895814"
+       transform="matrix(0.63506386,-0.77245964,0.84097406,0.54107544,0,0)"
+       inkscape:transform-center-x="-0.10300765"
+       inkscape:transform-center-y="-0.11237989"
+       inkscape:export-xdpi="98.303993"
+       inkscape:export-ydpi="98.303993" />
+    <ellipse
+       style="opacity:1;fill:#a67759;fill-opacity:1;stroke:none;stroke-width:0.24749506;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path6554-6-6-9"
+       cx="-106.21296"
+       cy="219.98056"
+       rx="1.9644309"
+       ry="1.3563927"
+       transform="rotate(-36.588055)"
+       inkscape:transform-center-x="0.06316049"
+       inkscape:transform-center-y="-0.020026198" />
+  </g>
+</svg>

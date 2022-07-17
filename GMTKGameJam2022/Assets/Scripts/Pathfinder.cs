@@ -183,6 +183,7 @@ public class Pathfinder
         }
         else
         {
+            Debug.Log("found no path");
             var debugNodes = new List<T>();
             foreach (var item in closed)
             {
