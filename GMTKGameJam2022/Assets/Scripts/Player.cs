@@ -188,6 +188,42 @@ public class Player: MonoBehaviour
         //check for user input
         Direction dir = Direction.NONE;
 
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            switch(state)
+            {
+                case PlayerState.IDLE:
+                    break;
+                case PlayerState.MOVING:
+                    break;
+                case PlayerState.AIMING_MELEE:
+                    resourceQuantities[DetermineRelevantDie(Resource.MELEE)]++;
+                    axeIndicator.GetComponent<SpriteRenderer>().enabled = false;
+                    state = PlayerState.IDLE;
+                    break;
+                case PlayerState.AIMING_RIFLE:
+                    resourceQuantities[DetermineRelevantDie(Resource.RIFLE)]++;
+                    rifleIndicator.GetComponent<SpriteRenderer>().enabled = false;
+                    state = PlayerState.IDLE;
+                    break;
+                case PlayerState.AIMING_SHOTGUN:
+                    resourceQuantities[DetermineRelevantDie(Resource.SHOTGUN)]++;
+                    shotgunIndicator.GetComponent<SpriteRenderer>().enabled = false;
+                    state = PlayerState.IDLE;
+                    break;
+                case PlayerState.AIMING_DASH:
+                    resourceQuantities[DetermineRelevantDie(Resource.DASH)]++;
+                    dashIndicator.GetComponent<SpriteRenderer>().enabled = false;
+                    state = PlayerState.IDLE;
+                    break;
+                case PlayerState.RELOADING:
+                    break;
+                case PlayerState.COOLDOWN:
+                    Debug.Log("You shouldn't be here!");
+                    break;
+            }
+        }
+
         if(Input.GetKeyDown(KeyCode.W))
         {
             dir = Direction.UP;
@@ -295,6 +331,16 @@ public class Player: MonoBehaviour
                 uiManager.UpdateCurrency(i, dice[i].GetResource(), dice[i].GetResult().quantity);
             }
         }
+    }
+
+    private int DetermineRelevantDie(Resource res)
+    {
+        for(int i = 0; i < dice.Length; i++)
+        {
+            if (dice[i].GetResource() == res) return i;
+        }
+
+        return -1;
     }
 
     private void RollAllDice()
