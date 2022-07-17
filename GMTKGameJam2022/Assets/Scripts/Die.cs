@@ -114,7 +114,7 @@ public class Die
     public void InitializeMove()
     {
         Resource res = Resource.MOVE;
-        int[] qnt = { 1, 1, 1, 2, 2, 2 };
+        int[] qnt = { 1, 2, 1, 2, 1, 2 };
 
         Initialize(res, qnt);
     }
@@ -122,7 +122,7 @@ public class Die
     public void InitializeMelee()
     {
         Resource res = Resource.MELEE;
-        int[] qnt = { 1, 1, 1, 2, 2, 3 };
+        int[] qnt = { 1, 2, 1, 2, 1, 3 };
 
         Initialize(res, qnt);
     }
@@ -130,7 +130,7 @@ public class Die
     public void InitializeRifle()
     {
         Resource res = Resource.RIFLE;
-        int[] qnt = { 0, 0, 1, 1, 1, 2 };
+        int[] qnt = { 0, 1, 0, 1, 2, 1 };
 
         Initialize(res, qnt);
     }
@@ -138,7 +138,7 @@ public class Die
     public void InitializeDash()
     {
         Resource res = Resource.DASH;
-        int[] qnt = { 0, 0, 0, 1, 1, 1 };
+        int[] qnt = { 0, 1, 0, 1, 0, 1 };
 
         Initialize(res, qnt);
     }
@@ -146,7 +146,7 @@ public class Die
     public void InitializeShotgun()
     {
         Resource res = Resource.SHOTGUN;
-        int[] qnt = { 0, 0, 0, 0, 1, 1 };
+        int[] qnt = { 1, 0, 1, 0, 1, 0 };
 
         Initialize(res, qnt);
     }

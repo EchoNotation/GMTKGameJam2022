@@ -21,6 +21,7 @@ public enum PlayerState
     AIMING_SHOTGUN,
     AIMING_DASH,
     RELOADING,
+    COOLDOWN,
 }
 
 public class Player: MonoBehaviour
@@ -42,6 +43,9 @@ public class Player: MonoBehaviour
 
     private const int stepsPerMove = 5;
     private int stepsRemaining;
+
+    private int cooldownTime = 30;
+    private int cooldownRemaining;
 
     private GameObject controller, sound;
     private Tilemap map;
@@ -109,6 +113,8 @@ public class Player: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(state == PlayerState.COOLDOWN) return;
+
         bool temp = false;
 
         if(rollingDice)
@@ -130,6 +136,15 @@ public class Player: MonoBehaviour
             }
         }
 
+        int total = resourceQuantities[0] + resourceQuantities[1] + resourceQuantities[2];
+        if(state == PlayerState.IDLE && total == 0)
+        {
+            Debug.Log("Starting cooldown");
+            state = PlayerState.COOLDOWN;
+            cooldownRemaining = cooldownTime;
+            return;
+        }
+
         //check for user input
         Direction dir = Direction.NONE;
 
@@ -148,12 +163,6 @@ public class Player: MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.D))
         {
             dir = Direction.RIGHT;
-        }
-
-        //Temporary code
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            RollAllDice();
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha1))
@@ -180,6 +189,7 @@ public class Player: MonoBehaviour
 
         switch (state)
         {
+            case PlayerState.COOLDOWN:
             case PlayerState.IDLE:
                 Debug.Log("You really shouldn't be here.");
                 break;
@@ -217,8 +227,20 @@ public class Player: MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (state == PlayerState.COOLDOWN)
+        {
+            cooldownRemaining--;
+
+            if (cooldownRemaining <= 0)
+            {
+                state = PlayerState.IDLE;
+                RollAllDice();
+            }
+            return;
+        }
+
         //Update dice rolling animation
-        for(int i = 0; i < dice.Length; i++)
+        for (int i = 0; i < dice.Length; i++)
         {
             if (dice[i].IsRolling())
             {
